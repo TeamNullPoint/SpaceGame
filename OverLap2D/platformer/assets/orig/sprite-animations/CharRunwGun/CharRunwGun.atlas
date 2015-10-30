@@ -1,0 +1,62 @@
+
+CharRunwGun.png
+size: 392,392
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+sprite0001
+  rotate: false
+  xy: 1, 1
+  size: 38, 38
+  orig: 38, 38
+  offset: 0, 0
+  index: -1
+sprite0002
+  rotate: false
+  xy: 41, 1
+  size: 38, 38
+  orig: 38, 38
+  offset: 0, 0
+  index: -1
+sprite0003
+  rotate: false
+  xy: 81, 1
+  size: 38, 38
+  orig: 38, 38
+  offset: 0, 0
+  index: -1
+sprite0004
+  rotate: false
+  xy: 121, 1
+  size: 38, 38
+  orig: 38, 38
+  offset: 0, 0
+  index: -1
+sprite0005
+  rotate: false
+  xy: 161, 1
+  size: 38, 38
+  orig: 38, 38
+  offset: 0, 0
+  index: -1
+sprite0006
+  rotate: false
+  xy: 201, 1
+  size: 38, 38
+  orig: 38, 38
+  offset: 0, 0
+  index: -1
+sprite0007
+  rotate: false
+  xy: 241, 1
+  size: 38, 38
+  orig: 38, 38
+  offset: 0, 0
+  index: -1
+sprite0008
+  rotate: false
+  xy: 281, 1
+  size: 38, 38
+  orig: 38, 38
+  offset: 0, 0
+  index: -1
