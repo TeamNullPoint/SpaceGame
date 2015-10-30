@@ -8,7 +8,8 @@ import com.uwsoft.editor.renderer.resources.IResourceRetriever;
 import com.uwsoft.editor.renderer.scene2d.CompositeActor;
 
 /**
- * Create the separate stage for the UI components.
+ * Creates the separate stage for the UI components.
+ *
  */
 public class UIStage extends Stage {
     public UIStage(IResourceRetriever ir){

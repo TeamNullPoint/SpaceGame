@@ -16,9 +16,10 @@ import com.uwsoft.editor.renderer.utils.ComponentRetriever;
 
 
 /**
+ * Initialization logic
+ * Iteration logic and disposal logic.
  */
 public class Player implements IScript {
-
     private boolean stopJump = false;
     private Entity player;
     private TransformComponent transformComponent;
