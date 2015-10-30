@@ -6,7 +6,7 @@ filter: Linear,Linear
 repeat: none
 Goldprogress
   rotate: false
-  xy: 324, 40
+  xy: 1928, 693
   size: 30, 102
   split: 9, 9, 9, 9
   orig: 30, 102
@@ -46,11 +46,20 @@ Pillar2
   orig: 640, 640
   offset: 0, 0
   index: -1
+RegPlatform (4)
+  rotate: false
+  xy: 1096, 324
+  size: 150, 30
+  split: 0, 0, 0, 0
+  orig: 150, 30
+  offset: 0, 0
+  index: -1
 RegularPlatform
   rotate: false
   xy: 2, 34
   size: 320, 320
   split: 108, 109, 58, 260
+  pad: 46, 273, 61, 184
   orig: 320, 320
   offset: 0, 0
   index: -1
@@ -70,14 +79,14 @@ SmallSlash
   index: -1
 Standw-Gun
   rotate: false
-  xy: 1928, 731
+  xy: 1096, 258
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 ball
   rotate: false
-  xy: 1096, 274
+  xy: 324, 62
   size: 80, 80
   orig: 80, 80
   offset: 0, 0
@@ -92,7 +101,7 @@ btn
   index: -1
 btnPressed
   rotate: false
-  xy: 1096, 226
+  xy: 406, 96
   size: 12, 46
   split: 4, 5, 4, 5
   orig: 12, 46

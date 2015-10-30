@@ -21,7 +21,7 @@ public class PlatformerTutorial extends ApplicationAdapter {
     @Override
     public void create () {
 
-        viewport = new FitViewport(332,200);
+        viewport = new FitViewport(189,62);
 
         sceneLoader = new SceneLoader();
         sceneLoader.loadScene(NullConstants.MAIN_SCENE, viewport);
@@ -47,7 +47,6 @@ public class PlatformerTutorial extends ApplicationAdapter {
 
         uiStage.act();
         uiStage.draw();
-
 
         ((OrthographicCamera)viewport.getCamera()).position.x = player.getX() + player.getWidth()/2f;
 

@@ -32,10 +32,10 @@ public class Player implements IScript {
     //move smoother
 
 
-    private float gravity = -360f;
+    private float gravity = -120f;
     private Vector2 speed;
 
-    private final float jumpSpeed = 200f;
+    private final float jumpSpeed = 66f;
 
     @Override
     public void init(Entity entity) {
@@ -43,8 +43,7 @@ public class Player implements IScript {
 
         transformComponent = ComponentRetriever.get(entity, TransformComponent.class);
         dimensionsComponent = ComponentRetriever.get(entity, DimensionsComponent.class);
-
-        speed = new Vector2(100, 0);
+        speed = new Vector2(33, 0);
 
     }
 
@@ -71,26 +70,20 @@ public class Player implements IScript {
         speed.y += gravity*delta;
         transformComponent.y += speed.y * delta;
 
-        //prevent the player from going through the ground.
-//        if(transformComponent.y < 21f) {
-//            speed.y = 0;
-//            transformComponent.y = 21f;
-//        }
         rayCast();
 
     }
 
 
     private void rayCast() {
-        float rayGap = dimensionsComponent.height/2;
+        float rayGap = (dimensionsComponent.height) / 2;
 
         float raySize = -(speed.y+Gdx.graphics.getDeltaTime())*Gdx.graphics.getDeltaTime();
 
-        //if(raySize < 5f) raySize = 5f;
         if(speed.y > 0) return;
 
-        Vector2 rayFrom = new Vector2((transformComponent.x + dimensionsComponent.width/2) * PhysicsBodyLoader.getScale(),
-                (transformComponent.y+rayGap) * PhysicsBodyLoader.getScale());
+        Vector2 rayFrom = new Vector2((transformComponent.x + (dimensionsComponent.width/2)) * PhysicsBodyLoader.getScale(),
+                (transformComponent.y + rayGap) * PhysicsBodyLoader.getScale());
 
         Vector2 rayTo = new Vector2((transformComponent.x + dimensionsComponent.width/2) * PhysicsBodyLoader.getScale(),
                 (transformComponent.y - raySize)* PhysicsBodyLoader.getScale());
@@ -102,8 +95,6 @@ public class Player implements IScript {
                 speed.y = 0;
                 //reposition player slightly upper the collision point.
                 transformComponent.y = point.y / PhysicsBodyLoader.getScale() + 0.01f;
-
-
                 return 0;
             }
         }, rayFrom, rayTo);
