@@ -40,7 +40,6 @@ public class PlatformSystem extends IteratingSystem {
         }
 
         platformComponent.timePassed += deltaTime;
-
         Vector2 newPosition = new Vector2();
 
         newPosition.x = physicsBodyComponent.body.getPosition().x;
