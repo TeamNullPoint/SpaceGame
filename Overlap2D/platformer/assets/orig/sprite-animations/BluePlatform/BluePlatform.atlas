@@ -1,0 +1,55 @@
+
+BluePlatform.png
+size: 392,392
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+sprite0001
+  rotate: false
+  xy: 1, 1
+  size: 48, 23
+  orig: 48, 23
+  offset: 0, 0
+  index: -1
+sprite0002
+  rotate: false
+  xy: 51, 1
+  size: 48, 23
+  orig: 48, 23
+  offset: 0, 0
+  index: -1
+sprite0003
+  rotate: false
+  xy: 101, 1
+  size: 48, 23
+  orig: 48, 23
+  offset: 0, 0
+  index: -1
+sprite0004
+  rotate: false
+  xy: 151, 1
+  size: 48, 23
+  orig: 48, 23
+  offset: 0, 0
+  index: -1
+sprite0005
+  rotate: false
+  xy: 201, 1
+  size: 48, 23
+  orig: 48, 23
+  offset: 0, 0
+  index: -1
+sprite0006
+  rotate: false
+  xy: 251, 1
+  size: 48, 23
+  orig: 48, 23
+  offset: 0, 0
+  index: -1
+sprite0007
+  rotate: false
+  xy: 301, 1
+  size: 48, 23
+  orig: 48, 23
+  offset: 0, 0
+  index: -1
