@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -8,22 +9,25 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.uwsoft.editor.renderer.SceneLoader;
 
+import com.uwsoft.editor.renderer.resources.ResourceManager;
 import com.uwsoft.editor.renderer.utils.ItemWrapper;
 
 public class PlatformerTutorial extends ApplicationAdapter {
 
     private SceneLoader sceneLoader;
     private Viewport viewport;
+    private ResourceManager resourceManager;
 
     private Player player;
     private UIStage uiStage;
 
     @Override
     public void create () {
-
+        resourceManager = new ResourceManager();
+        resourceManager.initAllResources();
         viewport = new FitViewport(189,62);
 
-        sceneLoader = new SceneLoader();
+        sceneLoader = new SceneLoader(resourceManager);
         sceneLoader.loadScene(NullConstants.MAIN_SCENE, viewport);
 
         ItemWrapper root = new ItemWrapper(sceneLoader.getRoot());
@@ -31,10 +35,9 @@ public class PlatformerTutorial extends ApplicationAdapter {
         player = new Player(sceneLoader.world);
         root.getChild(NullConstants.PLAYER).addScript(player);
 
-        //Edited something...
         sceneLoader.addComponentsByTagName(NullConstants.PLATFORM, PlatformComponent.class);
-
         sceneLoader.getEngine().addSystem(new PlatformSystem());
+
     }
 
     @Override
@@ -44,6 +47,8 @@ public class PlatformerTutorial extends ApplicationAdapter {
 
         sceneLoader.getEngine().update(Gdx.graphics.getDeltaTime());
 
+        //uiStage.act();
+       // uiStage.draw();
         ((OrthographicCamera) viewport.getCamera()).position.x = player.getX() + player.getWidth()/2f;
     }
 }
