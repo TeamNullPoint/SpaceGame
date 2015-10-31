@@ -31,6 +31,7 @@ public class PlatformerTutorial extends ApplicationAdapter {
         player = new Player(sceneLoader.world);
         root.getChild(NullConstants.PLAYER).addScript(player);
 
+        //Edited something...
         sceneLoader.addComponentsByTagName(NullConstants.PLATFORM, PlatformComponent.class);
 
         sceneLoader.getEngine().addSystem(new PlatformSystem());
@@ -43,8 +44,6 @@ public class PlatformerTutorial extends ApplicationAdapter {
 
         sceneLoader.getEngine().update(Gdx.graphics.getDeltaTime());
 
-        //uiStage.act();
-       // uiStage.draw();
         ((OrthographicCamera) viewport.getCamera()).position.x = player.getX() + player.getWidth()/2f;
     }
 }
