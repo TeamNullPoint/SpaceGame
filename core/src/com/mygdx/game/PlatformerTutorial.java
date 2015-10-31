@@ -31,8 +31,6 @@ public class PlatformerTutorial extends ApplicationAdapter {
         player = new Player(sceneLoader.world);
         root.getChild(NullConstants.PLAYER).addScript(player);
 
-        uiStage = new UIStage(sceneLoader.getRm());
-
         sceneLoader.addComponentsByTagName(NullConstants.PLATFORM, PlatformComponent.class);
 
         sceneLoader.getEngine().addSystem(new PlatformSystem());
@@ -40,16 +38,13 @@ public class PlatformerTutorial extends ApplicationAdapter {
 
     @Override
     public void render () {
-        Gdx.gl.glClearColor(192,192,192,1);
+        Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         sceneLoader.getEngine().update(Gdx.graphics.getDeltaTime());
 
-        uiStage.act();
-        uiStage.draw();
-
-        ((OrthographicCamera)viewport.getCamera()).position.x = player.getX() + player.getWidth()/2f;
-
-
+        //uiStage.act();
+       // uiStage.draw();
+        ((OrthographicCamera) viewport.getCamera()).position.x = player.getX() + player.getWidth()/2f;
     }
 }
