@@ -1,0 +1,132 @@
+
+PurplePlatform.png
+size: 392,392
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+sprite0001
+  rotate: false
+  xy: 1, 1
+  size: 47, 20
+  orig: 47, 20
+  offset: 0, 0
+  index: -1
+sprite00010
+  rotate: false
+  xy: 50, 1
+  size: 47, 20
+  orig: 47, 20
+  offset: 0, 0
+  index: -1
+sprite00011
+  rotate: false
+  xy: 99, 1
+  size: 47, 20
+  orig: 47, 20
+  offset: 0, 0
+  index: -1
+sprite00012
+  rotate: false
+  xy: 148, 1
+  size: 47, 20
+  orig: 47, 20
+  offset: 0, 0
+  index: -1
+sprite00013
+  rotate: false
+  xy: 197, 1
+  size: 47, 20
+  orig: 47, 20
+  offset: 0, 0
+  index: -1
+sprite00014
+  rotate: false
+  xy: 246, 1
+  size: 47, 20
+  orig: 47, 20
+  offset: 0, 0
+  index: -1
+sprite00015
+  rotate: false
+  xy: 295, 1
+  size: 47, 20
+  orig: 47, 20
+  offset: 0, 0
+  index: -1
+sprite00016
+  rotate: false
+  xy: 344, 1
+  size: 47, 20
+  orig: 47, 20
+  offset: 0, 0
+  index: -1
+sprite00017
+  rotate: false
+  xy: 393, 1
+  size: 47, 20
+  orig: 47, 20
+  offset: 0, 0
+  index: -1
+sprite00018
+  rotate: false
+  xy: 442, 1
+  size: 47, 20
+  orig: 47, 20
+  offset: 0, 0
+  index: -1
+sprite0002
+  rotate: false
+  xy: 491, 1
+  size: 47, 20
+  orig: 47, 20
+  offset: 0, 0
+  index: -1
+sprite0003
+  rotate: false
+  xy: 540, 1
+  size: 47, 20
+  orig: 47, 20
+  offset: 0, 0
+  index: -1
+sprite0004
+  rotate: false
+  xy: 589, 1
+  size: 47, 20
+  orig: 47, 20
+  offset: 0, 0
+  index: -1
+sprite0005
+  rotate: false
+  xy: 589, 1
+  size: 47, 20
+  orig: 47, 20
+  offset: 0, 0
+  index: -1
+sprite0006
+  rotate: false
+  xy: 589, 1
+  size: 47, 20
+  orig: 47, 20
+  offset: 0, 0
+  index: -1
+sprite0007
+  rotate: false
+  xy: 638, 1
+  size: 47, 20
+  orig: 47, 20
+  offset: 0, 0
+  index: -1
+sprite0008
+  rotate: false
+  xy: 687, 1
+  size: 47, 20
+  orig: 47, 20
+  offset: 0, 0
+  index: -1
+sprite0009
+  rotate: false
+  xy: 736, 1
+  size: 47, 20
+  orig: 47, 20
+  offset: 0, 0
+  index: -1

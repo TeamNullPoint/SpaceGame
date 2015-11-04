@@ -17,16 +17,16 @@ public class PlatformerTutorial extends ApplicationAdapter {
     private SceneLoader sceneLoader;
     private Viewport viewport;
     private ResourceManager resourceManager;
-
+    private AssetManager assetManager;
     private Player player;
     private UIStage uiStage;
 
     @Override
     public void create () {
+        assetManager = new AssetManager();
         resourceManager = new ResourceManager();
         resourceManager.initAllResources();
-        viewport = new FitViewport(189,62);
-
+        viewport = new FitViewport(189,100);
         sceneLoader = new SceneLoader(resourceManager);
         sceneLoader.loadScene(NullConstants.MAIN_SCENE, viewport);
 
@@ -35,8 +35,10 @@ public class PlatformerTutorial extends ApplicationAdapter {
         player = new Player(sceneLoader.world);
         root.getChild(NullConstants.PLAYER).addScript(player);
 
+
         sceneLoader.addComponentsByTagName(NullConstants.PLATFORM, PlatformComponent.class);
         sceneLoader.getEngine().addSystem(new PlatformSystem());
+
 
     }
 
@@ -44,7 +46,6 @@ public class PlatformerTutorial extends ApplicationAdapter {
     public void render () {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         sceneLoader.getEngine().update(Gdx.graphics.getDeltaTime());
 
         //uiStage.act();
