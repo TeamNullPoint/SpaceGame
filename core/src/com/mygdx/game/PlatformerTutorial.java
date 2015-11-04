@@ -8,12 +8,10 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.uwsoft.editor.renderer.SceneLoader;
-
 import com.uwsoft.editor.renderer.resources.ResourceManager;
 import com.uwsoft.editor.renderer.utils.ItemWrapper;
 
 public class PlatformerTutorial extends ApplicationAdapter {
-
     private SceneLoader sceneLoader;
     private Viewport viewport;
     private ResourceManager resourceManager;
@@ -35,11 +33,8 @@ public class PlatformerTutorial extends ApplicationAdapter {
         player = new Player(sceneLoader.world);
         root.getChild(NullConstants.PLAYER).addScript(player);
 
-
         sceneLoader.addComponentsByTagName(NullConstants.PLATFORM, PlatformComponent.class);
         sceneLoader.getEngine().addSystem(new PlatformSystem());
-
-
     }
 
     @Override
