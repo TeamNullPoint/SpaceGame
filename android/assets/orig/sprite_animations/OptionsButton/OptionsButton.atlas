@@ -1,0 +1,20 @@
+
+OptionsButton.png
+size: 392,392
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+OptionButton0001
+  rotate: false
+  xy: 1, 9
+  size: 32, 6
+  orig: 32, 6
+  offset: 0, 0
+  index: -1
+OptionButton0002
+  rotate: false
+  xy: 1, 1
+  size: 32, 6
+  orig: 32, 6
+  offset: 0, 0
+  index: -1
