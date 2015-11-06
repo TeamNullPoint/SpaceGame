@@ -42,7 +42,7 @@ public class PlatformerTutorial extends ApplicationAdapter {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         sceneLoader.getEngine().update(Gdx.graphics.getDeltaTime());
-
+        //asdasd
         //uiStage.act();
        // uiStage.draw();
         ((OrthographicCamera) viewport.getCamera()).position.x = player.getX() + player.getWidth()/2f;
