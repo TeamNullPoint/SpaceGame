@@ -24,12 +24,13 @@ LightPillar
   xy: 2, 356
   size: 640, 640
   split: 450, 166, 227, 313
+  pad: 578, 61, 134, 252
   orig: 640, 640
   offset: 0, 0
   index: -1
 Pillar1
   rotate: false
-  xy: 1286, 356
+  xy: 644, 356
   size: 640, 640
   split: 126, 226, 208, 111
   pad: -1, -1, 209, 110
@@ -38,7 +39,7 @@ Pillar1
   index: -1
 Pillar2
   rotate: false
-  xy: 644, 356
+  xy: 1286, 356
   size: 640, 640
   split: 165, 220, 304, 235
   pad: -1, -1, 305, 235
