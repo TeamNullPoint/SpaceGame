@@ -1,35 +1,71 @@
 
 pack.png
-size: 2048,1024
+size: 2048,2048
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+BeginButton
+  rotate: false
+  xy: 878, 34
+  size: 32, 16
+  orig: 32, 16
+  offset: 0, 0
+  index: -1
 Goldprogress
   rotate: false
-  xy: 1928, 693
+  xy: 1992, 1938
   size: 30, 102
   split: 9, 9, 9, 9
   orig: 30, 102
   offset: 0, 0
   index: -1
+Gray
+  rotate: false
+  xy: 2, 20
+  size: 320, 320
+  orig: 320, 320
+  offset: 0, 0
+  index: -1
+Green
+  rotate: false
+  xy: 2, 342
+  size: 672, 672
+  orig: 672, 672
+  offset: 0, 0
+  index: -1
+HowtoPlay
+  rotate: false
+  xy: 1670, 1720
+  size: 320, 320
+  orig: 320, 320
+  offset: 0, 0
+  index: -1
 Jumpw-Gun
   rotate: false
-  xy: 556, 160
+  xy: 1765, 1460
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 LightPillar
   rotate: false
-  xy: 2, 356
+  xy: 1028, 1400
   size: 640, 640
   split: 450, 166, 227, 313
+  pad: 578, 61, 134, 252
   orig: 640, 640
+  offset: 0, 0
+  index: -1
+OptionsButton
+  rotate: false
+  xy: 2, 2
+  size: 64, 16
+  orig: 64, 16
   offset: 0, 0
   index: -1
 Pillar1
   rotate: false
-  xy: 1286, 356
+  xy: 1028, 758
   size: 640, 640
   split: 126, 226, 208, 111
   pad: -1, -1, 209, 110
@@ -38,16 +74,30 @@ Pillar1
   index: -1
 Pillar2
   rotate: false
-  xy: 644, 356
+  xy: 676, 116
   size: 640, 640
   split: 165, 220, 304, 235
   pad: -1, -1, 305, 235
   orig: 640, 640
   offset: 0, 0
   index: -1
+Pressed
+  rotate: false
+  xy: 646, 26
+  size: 27, 6
+  orig: 27, 6
+  offset: 0, 0
+  index: -1
+PressedBegin
+  rotate: false
+  xy: 1100, 84
+  size: 135, 30
+  orig: 135, 30
+  offset: 0, 0
+  index: -1
 RegPlatform (4)
   rotate: false
-  xy: 1096, 324
+  xy: 878, 52
   size: 150, 30
   split: 0, 0, 0, 0
   orig: 150, 30
@@ -55,44 +105,59 @@ RegPlatform (4)
   index: -1
 RegularPlatform
   rotate: false
-  xy: 2, 34
+  xy: 324, 20
   size: 320, 320
   split: 108, 109, 58, 260
   pad: 46, 273, 61, 184
   orig: 320, 320
   offset: 0, 0
   index: -1
-SmallRun
-  rotate: false
-  xy: 324, 226
-  size: 512, 128
-  orig: 512, 128
-  offset: 0, 0
-  index: -1
 SmallSlash
   rotate: false
-  xy: 838, 98
+  xy: 676, 758
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 Standw-Gun
   rotate: false
-  xy: 1096, 258
+  xy: 1864, 1588
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
+TitleScreen
+  rotate: false
+  xy: 2, 1016
+  size: 1024, 1024
+  orig: 1024, 1024
+  offset: 0, 0
+  index: -1
+UnPressed
+  rotate: false
+  xy: 1237, 108
+  size: 27, 6
+  orig: 27, 6
+  offset: 0, 0
+  index: -1
+UnPressedBegin
+  rotate: false
+  xy: 1030, 52
+  size: 135, 30
+  split: 0, 0, 0, 0
+  orig: 135, 30
+  offset: 0, 0
+  index: -1
 ball
   rotate: false
-  xy: 324, 62
+  xy: 934, 934
   size: 80, 80
   orig: 80, 80
   offset: 0, 0
   index: -1
 btn
   rotate: false
-  xy: 2023, 944
+  xy: 646, 288
   size: 12, 52
   split: 4, 5, 6, 7
   orig: 12, 52
@@ -100,15 +165,38 @@ btn
   index: -1
 btnPressed
   rotate: false
-  xy: 406, 96
+  xy: 1992, 1890
   size: 12, 46
   split: 4, 5, 4, 5
   orig: 12, 46
   offset: 0, 0
   index: -1
+bush
+  rotate: false
+  xy: 1670, 1526
+  size: 192, 192
+  split: 0, 0, 0, 0
+  orig: 192, 192
+  offset: 0, 0
+  index: -1
+grass
+  rotate: false
+  xy: 1864, 1654
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+grasspuff
+  rotate: false
+  xy: 1670, 1259
+  size: 64, 64
+  split: 0, 0, 0, 0
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
 item1
   rotate: false
-  xy: 1928, 797
+  xy: 1670, 1325
   size: 93, 199
   split: 0, 93, 92, 95
   orig: 93, 199
@@ -116,7 +204,7 @@ item1
   index: -1
 paltform1
   rotate: false
-  xy: 324, 144
+  xy: 646, 34
   size: 230, 80
   split: 112, 109, 49, 28
   orig: 230, 80
@@ -124,8 +212,45 @@ paltform1
   index: -1
 paltform2
   rotate: false
-  xy: 2, 2
+  xy: 878, 84
   size: 220, 30
   orig: 220, 30
+  offset: 0, 0
+  index: -1
+soil
+  rotate: false
+  xy: 934, 868
+  size: 64, 64
+  split: 0, 0, 32, 31
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+tree
+  rotate: false
+  xy: 1318, 116
+  size: 640, 640
+  split: 121, 50, 373, 167
+  orig: 640, 640
+  offset: 0, 0
+  index: -1
+
+pack2.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+SmallRun
+  rotate: false
+  xy: 388, 258
+  size: 512, 128
+  orig: 512, 128
+  offset: 0, 0
+  index: -1
+tree (1)
+  rotate: false
+  xy: 2, 2
+  size: 384, 384
+  split: 0, 0, 227, 79
+  orig: 384, 384
   offset: 0, 0
   index: -1
