@@ -15,6 +15,15 @@ public class UIStage extends Stage {
 
         Gdx.input.setInputProcessor(this);
         ProjectInfoVO projectInfo = ir.getProjectVO();
+        CompositeItemVO moveButtondata = projectInfo.libraryItems.get("moveButton");
+        CompositeActor buttonActor =new CompositeActor(moveButtondata, ir);
+
+        addActor(buttonActor);
+
+        buttonActor.setX(200);
+        buttonActor.setY(100);
+
+
 
     }
 }
