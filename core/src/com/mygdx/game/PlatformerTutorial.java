@@ -35,6 +35,8 @@ public class PlatformerTutorial extends ApplicationAdapter {
 
         sceneLoader.addComponentsByTagName(NullConstants.PLATFORM, PlatformComponent.class);
         sceneLoader.getEngine().addSystem(new PlatformSystem());
+        sceneLoader.addComponentsByTagName(NullConstants.BULLET, Bullet.class);
+        sceneLoader.getEngine().addSystem(new BulletSystem());
     }
 
     @Override

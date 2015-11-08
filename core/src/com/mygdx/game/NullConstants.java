@@ -7,5 +7,6 @@ public class NullConstants {
     protected static final String MAIN_SCENE = "MainScene";
     protected static final String PLAYER = "player" ;
     protected static final String PLATFORM = "platform";
+    protected static final String BULLET = "bullet";
 
 }
