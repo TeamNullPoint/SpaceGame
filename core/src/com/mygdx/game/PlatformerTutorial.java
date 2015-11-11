@@ -12,6 +12,7 @@ import com.uwsoft.editor.renderer.SceneLoader;
 import com.uwsoft.editor.renderer.components.additional.ButtonComponent;
 import com.uwsoft.editor.renderer.data.SimpleImageVO;
 import com.uwsoft.editor.renderer.resources.ResourceManager;
+import com.uwsoft.editor.renderer.scene2d.CompositeActor;
 import com.uwsoft.editor.renderer.utils.ItemWrapper;
 
 public class PlatformerTutorial extends ApplicationAdapter {
@@ -31,14 +32,12 @@ public class PlatformerTutorial extends ApplicationAdapter {
         resourceManager = new ResourceManager();
         resourceManager.initAllResources();
 
-        viewport = new FitViewport(189, 100);
+        viewport = new FitViewport(180,120);
         sceneLoader = new SceneLoader();
         sceneLoader.loadScene(NullConstants.TITLE_SCREEN, viewport);
 
 
         final SimpleImageVO vo = new SimpleImageVO();
-        vo.imageName = "HowtoPlay.png";
-        final Entity entity = new Entity();
 
         root = new ItemWrapper(sceneLoader.getRoot());
 
@@ -74,11 +73,17 @@ public class PlatformerTutorial extends ApplicationAdapter {
                 playing = true;
             }
         });
-        root.getChild("HowButton").getEntity().getComponent(ButtonComponent.class).addListener(new ButtonComponent.ButtonListener() {
+        root.getChild("howtoplay").getEntity().getComponent(ButtonComponent.class).addListener(new ButtonComponent.ButtonListener() {
             @Override
             public void touchUp() {
-            }
+                SimpleImageVO HowtoPlay = new SimpleImageVO();
+                HowtoPlay.imageName = "HowtoPlay";
+                HowtoPlay.x = 55;
+                HowtoPlay.y = 20;
+                sceneLoader.entityFactory.createEntity(sceneLoader.getRoot(),HowtoPlay);
 
+
+            }
             @Override
             public void touchDown() {
 
@@ -88,21 +93,16 @@ public class PlatformerTutorial extends ApplicationAdapter {
             public void clicked() {
 
             }
-            private void howtoplay() {
-                sceneLoader = new SceneLoader();
-                sceneLoader.loadScene(NullConstants.HOW_TO_PLAY, viewport);
-                root = new ItemWrapper(sceneLoader.getRoot());
-
-                sceneLoader.addComponentsByTagName(NullConstants.PLATFORM, PlatformComponent.class);
-                sceneLoader.getEngine().addSystem(new PlatformSystem());
-            }
         });
     }
 
 
 
     public void render() {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+        if(playing)
+           Gdx.gl.glClearColor(0, 0, 0, 0.2f);
+        else
+            Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         sceneLoader.getEngine().update(Gdx.graphics.getDeltaTime());
 

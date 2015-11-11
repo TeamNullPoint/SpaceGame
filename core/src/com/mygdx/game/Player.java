@@ -20,12 +20,15 @@ import com.uwsoft.editor.renderer.physics.PhysicsBodyLoader;
 import com.uwsoft.editor.renderer.scripts.IScript;
 import com.uwsoft.editor.renderer.utils.ComponentRetriever;
 
+import java.security.Key;
+
 /**
  * Initialization logic
  * Iteration logic and disposal logic.
  */
 public class Player implements IScript {
-    private boolean stopJump = false;
+    private boolean grounded = false;
+    private boolean stopJumpAnimation = true;
     private Entity player;
     private TransformComponent transformComponent;
     private DimensionsComponent dimensionsComponent;
@@ -71,11 +74,14 @@ public class Player implements IScript {
     }
 
     private void walkingState(){
-        //spriteAnimationStateComponent.set(spriteAnimationComponent.frameRangeMap.get("walking"), 13, Animation.PlayMode.LOOP);
+        spriteAnimationStateComponent.set(spriteAnimationComponent.frameRangeMap.get("walking"), 13, Animation.PlayMode.LOOP);
 
     }
     private void standingState(){
-        //spriteAnimationStateComponent.set(spriteAnimationComponent.frameRangeMap.get("standing"), 0, Animation.PlayMode.LOOP);
+        spriteAnimationStateComponent.set(spriteAnimationComponent.frameRangeMap.get("standing"), 0, Animation.PlayMode.LOOP);
+    }
+    private void jumpingState(){
+        spriteAnimationStateComponent.set(spriteAnimationComponent.frameRangeMap.get("jumping"), 0, Animation.PlayMode.LOOP);
     }
 
     @Override
@@ -88,43 +94,80 @@ public class Player implements IScript {
             transformComponent.x  += speed.x * delta;
             transformComponent.scaleX = 1f;
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.RIGHT)|| Gdx.input.isKeyJustPressed(Input.Keys.LEFT)) {
-            walkingState();
-
-        }
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             speed.y = jumpSpeed;
+            grounded = false;
         }
-        if(!(Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.RIGHT))){
+        if(!landed()) {
+            jumpingState();
+            stopJumpAnimation = false;
+        }
+        if((Gdx.input.isKeyPressed(Input.Keys.RIGHT)|| Gdx.input.isKeyPressed(Input.Keys.LEFT)) && landed() && !stopJumpAnimation) {
+            walkingState();
+            stopJumpAnimation = true;
+        }
+        if(!(Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.RIGHT))&& landed()){
             standingState();
+            stopJumpAnimation = false;
         }
+
         speed.y += gravity*delta;
         transformComponent.y += speed.y * delta;
         rayCast();
+        checkForBodyCollision();
+
     }
 
 
     private void rayCast() {
-        float rayGap = (dimensionsComponent.height) / 2;
+        float yrayGap = (dimensionsComponent.height) / 10;
 
-        float raySize = -(speed.y+Gdx.graphics.getDeltaTime())*Gdx.graphics.getDeltaTime();
+        float yraySize = -(speed.y+Gdx.graphics.getDeltaTime())*Gdx.graphics.getDeltaTime();
+
+        //if(yraySize )
 
         if(speed.y > 0) return;
 
-        Vector2 rayFrom = new Vector2((transformComponent.x + (dimensionsComponent.width/2)) * PhysicsBodyLoader.getScale(),
-                (transformComponent.y + rayGap) * PhysicsBodyLoader.getScale());
+        Vector2 yrayFrom = new Vector2((transformComponent.x + (dimensionsComponent.width/2)) * PhysicsBodyLoader.getScale(),
+                (transformComponent.y + yrayGap) * PhysicsBodyLoader.getScale());
 
-        Vector2 rayTo = new Vector2((transformComponent.x + dimensionsComponent.width/2) * PhysicsBodyLoader.getScale(),
-                (transformComponent.y - raySize)* PhysicsBodyLoader.getScale());
+        Vector2 yrayTo = new Vector2((transformComponent.x + dimensionsComponent.width/2) * PhysicsBodyLoader.getScale(),
+                (transformComponent.y - yraySize)* PhysicsBodyLoader.getScale());
 
         world.rayCast(new RayCastCallback() {
             @Override
             public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
                 speed.y = 0;
                 transformComponent.y = point.y / PhysicsBodyLoader.getScale() + 0.01f;
+                grounded = true;
                 return 0;
             }
-        }, rayFrom, rayTo);
+        }, yrayFrom, yrayTo);
+    }
+    private void checkForBodyCollision(){
+        float xrayGap = (dimensionsComponent.width) / 10;
+        float xraySize = 2;
+
+        if(speed.x > 0)
+            return;
+        Vector2 xrayFrom = new Vector2((transformComponent.y + (dimensionsComponent.height/2)) * PhysicsBodyLoader.getScale(),
+                (transformComponent.y + xrayGap) * PhysicsBodyLoader.getScale());
+        Vector2 xrayTo = new Vector2((transformComponent.y + dimensionsComponent.height/2) * PhysicsBodyLoader.getScale(),
+                (transformComponent.y - xraySize)* PhysicsBodyLoader.getScale());
+        world.rayCast(new RayCastCallback() {
+            @Override
+            public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
+                speed.x = 0;
+                transformComponent.x = point.x / PhysicsBodyLoader.getScale() + 0.01f;
+                return 0;
+            }
+        }, xrayFrom, xrayTo);
+
+    }
+
+    public boolean landed(){
+        return grounded;
+
     }
 
     public float getX() {
