@@ -16,19 +16,19 @@ import com.uwsoft.editor.renderer.utils.ComponentRetriever;
  *
  */
 public class PlatformSystem extends IteratingSystem {
-    //We must create a component mapper for this system that maps all components of a type to it for
-    //management.
-    private ComponentMapper<PlatformComponent> platformSystemComponentMapper = ComponentMapper.getFor(PlatformComponent.class);
-
-    //Retrieves all platform components that match a type for management by the system.
     public PlatformSystem(){
         super(Family.all(PlatformComponent.class).get());
     }
+    //We must create a component mapper for this system that maps all components of a type to it for
+    //management.
+    private ComponentMapper<PlatformComponent> collisionSystemComponentMapper = ComponentMapper.getFor(PlatformComponent.class);
+
+    //Retrieves all platform components that match a type for management by the system.
 
     //Iterates through entities managed by this system, and processes them in some way.
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        PlatformComponent platformComponent = platformSystemComponentMapper.get(entity);
+        PlatformComponent platformComponent = collisionSystemComponentMapper.get(entity);
         //Retrieve and entity's transform component.
         TransformComponent transformComponent = ComponentRetriever.get(entity, TransformComponent.class);
 
