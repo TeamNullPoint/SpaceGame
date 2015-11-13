@@ -34,12 +34,11 @@ public class Player implements IScript {
     private static DimensionsComponent dimensionsComponent;
     private SpriteAnimationComponent spriteAnimationComponent;
     private SpriteAnimationStateComponent spriteAnimationStateComponent;
-    private static float deltatest;
+
 
     private static boolean left = false;
     private static boolean right = false;
     private static boolean jump = false;
-    private static boolean shoot = false;
 
     private World world;
 
@@ -59,10 +58,8 @@ public class Player implements IScript {
 
         transformComponent = ComponentRetriever.get(entity, TransformComponent.class);
         dimensionsComponent = ComponentRetriever.get(entity, DimensionsComponent.class);
-
         spriteAnimationComponent = ComponentRetriever.get(entity, SpriteAnimationComponent.class);
         spriteAnimationStateComponent = ComponentRetriever.get(entity, SpriteAnimationStateComponent.class);
-
         ImmutableArray<Component> allComponents = entity.getComponents();
         speed = new Vector2(33, 0);
 
@@ -80,16 +77,9 @@ public class Player implements IScript {
     private void jumpShootingState(){
         spriteAnimationStateComponent.set(spriteAnimationComponent.frameRangeMap.get("jumpshooting"), 13, Animation.PlayMode.LOOP);
     }
-    private void standShootingState(){
-        spriteAnimationStateComponent.set(spriteAnimationComponent.frameRangeMap.get("standshoot"), 13, Animation.PlayMode.LOOP);
-    }
-    private void walkShootingState(){
-        spriteAnimationStateComponent.set(spriteAnimationComponent.frameRangeMap.get("walkshoot"), 13, Animation.PlayMode.LOOP);
-    }
 
     @Override
     public void act(float delta) {
-        deltatest = delta;
         if(left) {
             transformComponent.x -= speed.x * delta;
             transformComponent.scaleX = -1f;
@@ -105,24 +95,20 @@ public class Player implements IScript {
         if(!landed()) {
             jumpingState();
             stopJumpAnimation = false;
-            if(shoot)
-                jumpShootingState();
         }
         if((right|| left) && landed() && !stopJumpAnimation) {
             walkingState();
             stopJumpAnimation = true;
-            if(shoot)
-                walkShootingState();
         }
         if(!(left || right)&& landed()){
             standingState();
             stopJumpAnimation = false;
-            if(shoot)
-                standShootingState();
         }
+
         speed.y += gravity*delta;
         transformComponent.y += speed.y * delta;
         rayCast();
+        checkForBodyCollision();
 
     }
     public static void moveLeft(boolean yes)
@@ -139,26 +125,24 @@ public class Player implements IScript {
     }
     public static void doshoot(boolean yes)
     {
-        shoot = yes;
     }
 
 
 
 
     private void rayCast() {
-        float yrayGap = (dimensionsComponent.height) / 2;
+        float rayGap = (dimensionsComponent.height) / 2;
 
-        float yraySize = -(speed.y+Gdx.graphics.getDeltaTime())*Gdx.graphics.getDeltaTime();
+        float raySize = -(speed.y+Gdx.graphics.getDeltaTime())*Gdx.graphics.getDeltaTime();
 
-        //if(yraySize )
 
         if(speed.y > 0) return;
 
-        Vector2 yrayFrom = new Vector2((transformComponent.x + (dimensionsComponent.width/2)) * PhysicsBodyLoader.getScale(),
-                (transformComponent.y + yrayGap) * PhysicsBodyLoader.getScale());
+        Vector2 rayFrom = new Vector2((transformComponent.x + (dimensionsComponent.width/2)) * PhysicsBodyLoader.getScale(),
+                (transformComponent.y + rayGap) * PhysicsBodyLoader.getScale());
 
-        Vector2 yrayTo = new Vector2((transformComponent.x + dimensionsComponent.width/2) * PhysicsBodyLoader.getScale(),
-                (transformComponent.y - yraySize)* PhysicsBodyLoader.getScale());
+        Vector2 rayTo = new Vector2((transformComponent.x + dimensionsComponent.width/2) * PhysicsBodyLoader.getScale(),
+                (transformComponent.y - raySize)* PhysicsBodyLoader.getScale());
 
         world.rayCast(new RayCastCallback() {
             @Override
@@ -168,7 +152,32 @@ public class Player implements IScript {
                 grounded = true;
                 return 0;
             }
-        }, yrayFrom, yrayTo);
+        }, rayFrom, rayTo);
+    }
+
+    private void checkForBodyCollision(){
+        float rayGap = (dimensionsComponent.width) / 2;
+        float raySize = 2;
+
+        if(speed.x > 0) return;
+
+        Vector2 rayFrom = new Vector2((transformComponent.y + (dimensionsComponent.height/2)) * PhysicsBodyLoader.getScale(),
+                (transformComponent.y + rayGap) * PhysicsBodyLoader.getScale());
+
+        Vector2 rayTo = new Vector2((transformComponent.y + dimensionsComponent.height/2) * PhysicsBodyLoader.getScale(),
+                (transformComponent.y - raySize)* PhysicsBodyLoader.getScale());
+
+
+
+        world.rayCast(new RayCastCallback() {
+            @Override
+            public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
+                speed.x = 0;
+                transformComponent.x = point.x / PhysicsBodyLoader.getScale() + 0.01f;
+                return 0;
+            }
+        }, rayFrom, rayTo);
+
     }
 
     public boolean landed(){

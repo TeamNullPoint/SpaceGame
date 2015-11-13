@@ -14,14 +14,14 @@ AButton (1)
   index: -1
 AlienBigGrass
   rotate: false
-  xy: 1765, 1302
+  xy: 1765, 1236
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 AlienFirepit
   rotate: false
-  xy: 1670, 797
+  xy: 1736, 797
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
@@ -35,7 +35,7 @@ AlienFlower
   index: -1
 AlienTree
   rotate: false
-  xy: 1864, 1582
+  xy: 1670, 1025
   size: 150, 140
   split: 0, 0, 94, 29
   orig: 150, 140
@@ -43,7 +43,7 @@ AlienTree
   index: -1
 AlienTree2
   rotate: false
-  xy: 1670, 1025
+  xy: 1864, 1582
   size: 150, 140
   split: 0, 0, 100, 28
   orig: 150, 140
@@ -51,7 +51,7 @@ AlienTree2
   index: -1
 Alienbush
   rotate: false
-  xy: 934, 872
+  xy: 934, 806
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
@@ -65,7 +65,7 @@ Aliengrass
   index: -1
 BButton
   rotate: false
-  xy: 1732, 762
+  xy: 582, 179
   size: 60, 33
   split: 0, 0, 0, 0
   orig: 60, 33
@@ -80,7 +80,7 @@ BeginButton
   index: -1
 Cloud
   rotate: false
-  xy: 1832, 1400
+  xy: 934, 872
   size: 64, 64
   split: 27, 14, 21, 36
   orig: 64, 64
@@ -110,7 +110,7 @@ Goldprogress
   index: -1
 Gray
   rotate: false
-  xy: 2, 24
+  xy: 1670, 1724
   size: 320, 320
   orig: 320, 320
   offset: 0, 0
@@ -162,14 +162,14 @@ HowtoPlay
   index: -1
 Jumpw-Gun
   rotate: false
-  xy: 934, 806
+  xy: 1765, 1302
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 Left Arrow
   rotate: false
-  xy: 1898, 1431
+  xy: 1794, 762
   size: 60, 33
   split: 0, 0, 0, 0
   orig: 60, 33
@@ -177,14 +177,14 @@ Left Arrow
   index: -1
 Left Arrow (1)
   rotate: false
-  xy: 1794, 762
+  xy: 1898, 1431
   size: 60, 33
   orig: 60, 33
   offset: 0, 0
   index: -1
 LightPillar
   rotate: false
-  xy: 1028, 1404
+  xy: 1028, 762
   size: 640, 640
   split: 450, 166, 227, 313
   pad: 578, 61, 134, 252
@@ -200,7 +200,7 @@ OptionsButton
   index: -1
 Pillar1
   rotate: false
-  xy: 1028, 762
+  xy: 1318, 120
   size: 640, 640
   split: 126, 226, 208, 111
   pad: -1, -1, 209, 110
@@ -218,14 +218,14 @@ Pillar2
   index: -1
 Pressed
   rotate: false
-  xy: 1992, 1934
+  xy: 1898, 1423
   size: 27, 6
   orig: 27, 6
   offset: 0, 0
   index: -1
 PressedBegin
   rotate: false
-  xy: 1832, 1498
+  xy: 1832, 1466
   size: 135, 30
   orig: 135, 30
   offset: 0, 0
@@ -240,7 +240,7 @@ RegPlatform (4)
   index: -1
 RegularPlatform
   rotate: false
-  xy: 1670, 1724
+  xy: 2, 24
   size: 320, 320
   split: 108, 109, 58, 260
   pad: 46, 273, 61, 184
@@ -249,7 +249,7 @@ RegularPlatform
   index: -1
 RightArrow
   rotate: false
-  xy: 582, 179
+  xy: 1732, 762
   size: 60, 33
   split: 0, 0, 0, 0
   orig: 60, 33
@@ -264,7 +264,7 @@ SmallSlash
   index: -1
 Standw-Gun
   rotate: false
-  xy: 1736, 797
+  xy: 1832, 1400
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
@@ -278,14 +278,14 @@ TitleScreen
   index: -1
 UnPressed
   rotate: false
-  xy: 1898, 1423
+  xy: 1992, 1934
   size: 27, 6
   orig: 27, 6
   offset: 0, 0
   index: -1
 UnPressedBegin
   rotate: false
-  xy: 1832, 1466
+  xy: 1832, 1498
   size: 135, 30
   split: 0, 0, 0, 0
   orig: 135, 30
@@ -332,7 +332,7 @@ grass
   index: -1
 grasspuff
   rotate: false
-  xy: 1765, 1236
+  xy: 1670, 797
   size: 64, 64
   split: 0, 0, 0, 0
   orig: 64, 64
@@ -408,7 +408,7 @@ soil
   index: -1
 tree
   rotate: false
-  xy: 1318, 120
+  xy: 1028, 1404
   size: 640, 640
   split: 121, 50, 373, 167
   orig: 640, 640
@@ -416,28 +416,20 @@ tree
   index: -1
 
 pack2.png
-size: 2048,512
+size: 1024,512
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-Rocketcrash
-  rotate: false
-  xy: 2, 2
-  size: 400, 400
-  split: 0, 0, 0, 0
-  orig: 400, 400
-  offset: 0, 0
-  index: -1
 SmallRun
   rotate: false
-  xy: 790, 274
+  xy: 388, 258
   size: 512, 128
   orig: 512, 128
   offset: 0, 0
   index: -1
 tree (1)
   rotate: false
-  xy: 404, 18
+  xy: 2, 2
   size: 384, 384
   split: 0, 0, 227, 79
   orig: 384, 384

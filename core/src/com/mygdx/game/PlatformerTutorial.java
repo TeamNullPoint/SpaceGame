@@ -1,6 +1,8 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.ai.steer.limiters.NullLimiter;
+import com.badlogic.gdx.ai.steer.utils.Collision;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -32,27 +34,30 @@ public class PlatformerTutorial extends ApplicationAdapter {
 
         viewport = new FitViewport(180, 120);
         sceneLoader = new SceneLoader();
+
         sceneLoader.loadScene(NullConstants.TITLE_SCREEN, viewport);
 
         root = new ItemWrapper(sceneLoader.getRoot());
 
         sceneLoader.addComponentsByTagName("button", ButtonComponent.class);
+
+
+
+
         root.getChild("beginbutton").getEntity().getComponent(ButtonComponent.class).addListener(new ButtonComponent.ButtonListener() {
+
             @Override
             public void touchUp() {
                 level();
             }
-
             @Override
             public void touchDown() {
-
             }
-
             @Override
             public void clicked() {
-
             }
         });
+
         root.getChild("howtoplay").getEntity().getComponent(ButtonComponent.class).addListener(new ButtonComponent.ButtonListener() {
             @Override
             public void touchUp() {
@@ -99,7 +104,7 @@ public class PlatformerTutorial extends ApplicationAdapter {
     }
 
     public static void level(){
-        sceneLoader = new SceneLoader(resourceManager);
+        //sceneLoader = new SceneLoader(resourceManager);
         sceneLoader.loadScene(NullConstants.MAIN_SCENE, viewport);
         root = new ItemWrapper(sceneLoader.getRoot());
         player = new Player(sceneLoader.world);
@@ -108,7 +113,10 @@ public class PlatformerTutorial extends ApplicationAdapter {
         uiStage = new UIStage(sceneLoader.getRm());
 
         sceneLoader.addComponentsByTagName(NullConstants.PLATFORM, PlatformComponent.class);
+        sceneLoader.addComponentsByTagName(NullConstants.ENEMY, CollisionComponent.class);
+
         sceneLoader.getEngine().addSystem(new PlatformSystem());
+        sceneLoader.getEngine().addSystem(new CollisionSystem(player));
         playing = true;
     }
 
