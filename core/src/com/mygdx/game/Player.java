@@ -30,10 +30,16 @@ public class Player implements IScript {
     private boolean grounded = false;
     private boolean stopJumpAnimation = true;
     private Entity player;
-    private TransformComponent transformComponent;
-    private DimensionsComponent dimensionsComponent;
+    private static TransformComponent transformComponent;
+    private static DimensionsComponent dimensionsComponent;
     private SpriteAnimationComponent spriteAnimationComponent;
     private SpriteAnimationStateComponent spriteAnimationStateComponent;
+    private static float deltatest;
+
+    private static boolean left = false;
+    private static boolean right = false;
+    private static boolean jump = false;
+    private static boolean shoot = false;
 
     private World world;
 
@@ -43,7 +49,7 @@ public class Player implements IScript {
 
 
     private float gravity = -120f;
-    private Vector2 speed;
+    private static Vector2 speed;
 
     private final float jumpSpeed = 66f;
 
@@ -58,24 +64,12 @@ public class Player implements IScript {
         spriteAnimationStateComponent = ComponentRetriever.get(entity, SpriteAnimationStateComponent.class);
 
         ImmutableArray<Component> allComponents = entity.getComponents();
-        for(Component component : allComponents){
-            System.out.println(component.getClass().getSimpleName());
-        }
-
-        System.out.println(spriteAnimationComponent.currentAnimation);
-        walkingState();
-        for(TextureAtlas.AtlasRegion region : spriteAnimationStateComponent.allRegions){
-            System.out.println(region.name);
-        }
-
-        System.out.println(spriteAnimationComponent.frameRangeMap);
         speed = new Vector2(33, 0);
 
     }
 
     private void walkingState(){
         spriteAnimationStateComponent.set(spriteAnimationComponent.frameRangeMap.get("walking"), 13, Animation.PlayMode.LOOP);
-
     }
     private void standingState(){
         spriteAnimationStateComponent.set(spriteAnimationComponent.frameRangeMap.get("standing"), 0, Animation.PlayMode.LOOP);
@@ -83,18 +77,22 @@ public class Player implements IScript {
     private void jumpingState(){
         spriteAnimationStateComponent.set(spriteAnimationComponent.frameRangeMap.get("jumping"), 0, Animation.PlayMode.LOOP);
     }
+    private void jumpShootingState(){
+        spriteAnimationStateComponent.set(spriteAnimationComponent.frameRangeMap.get("jumpshooting"), 13, Animation.PlayMode.LOOP);
+    }
 
     @Override
     public void act(float delta) {
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+        deltatest = delta;
+        if(left) {
             transformComponent.x -= speed.x * delta;
             transformComponent.scaleX = -1f;
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+        if(right) {
             transformComponent.x  += speed.x * delta;
             transformComponent.scaleX = 1f;
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+        if(jump) {
             speed.y = jumpSpeed;
             grounded = false;
         }
@@ -102,11 +100,11 @@ public class Player implements IScript {
             jumpingState();
             stopJumpAnimation = false;
         }
-        if((Gdx.input.isKeyPressed(Input.Keys.RIGHT)|| Gdx.input.isKeyPressed(Input.Keys.LEFT)) && landed() && !stopJumpAnimation) {
+        if((right|| left) && landed() && !stopJumpAnimation) {
             walkingState();
             stopJumpAnimation = true;
         }
-        if(!(Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.RIGHT))&& landed()){
+        if(!(left || right)&& landed()){
             standingState();
             stopJumpAnimation = false;
         }
@@ -117,10 +115,28 @@ public class Player implements IScript {
         checkForBodyCollision();
 
     }
+    public static void moveLeft(boolean yes)
+    {
+       left = yes;
+    }
+    public static void moveRight(boolean yes)
+    {
+        right = yes;
+    }
+    public static void dojump(boolean yes)
+    {
+        jump = yes;
+    }
+    public static void doshoot(boolean yes)
+    {
+        shoot = yes;
+    }
+
+
 
 
     private void rayCast() {
-        float yrayGap = (dimensionsComponent.height) / 10;
+        float yrayGap = (dimensionsComponent.height) / 2;
 
         float yraySize = -(speed.y+Gdx.graphics.getDeltaTime())*Gdx.graphics.getDeltaTime();
 
@@ -145,7 +161,7 @@ public class Player implements IScript {
         }, yrayFrom, yrayTo);
     }
     private void checkForBodyCollision(){
-        float xrayGap = (dimensionsComponent.width) / 10;
+        float xrayGap = (dimensionsComponent.width) / 2;
         float xraySize = 2;
 
         if(speed.x > 0)
@@ -167,7 +183,6 @@ public class Player implements IScript {
 
     public boolean landed(){
         return grounded;
-
     }
 
     public float getX() {

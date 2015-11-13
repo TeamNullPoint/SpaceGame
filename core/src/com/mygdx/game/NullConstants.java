@@ -9,5 +9,6 @@ public class NullConstants {
     protected static final String HOW_TO_PLAY = "HowtoPlay";
     protected static final String PLAYER = "player" ;
     protected static final String PLATFORM = "platform";
+    protected static final String GAME_OVER = "GameOver";
 
 }
