@@ -1,6 +1,5 @@
 package com.mygdx.game;
 
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.Gdx;
@@ -15,30 +14,25 @@ import com.uwsoft.editor.renderer.resources.ResourceManager;
 import com.uwsoft.editor.renderer.utils.ItemWrapper;
 
 public class PlatformerTutorial extends ApplicationAdapter {
-    private SceneLoader sceneLoader;
-    private Viewport viewport;
-    private ResourceManager resourceManager;
+    private static SceneLoader sceneLoader;
+    private static Viewport viewport;
+    private static ResourceManager resourceManager;
     private AssetManager assetManager;
-    private Player player;
-    private UIStage uiStage;
-    private ItemWrapper root;
-    private Boolean playing = false;
+    private static Player player;
+    private static UIStage uiStage;
+    private static ItemWrapper root;
+    private static Boolean playing = false;
 
 
     @Override
-    public void create () {
+    public void create() {
         assetManager = new AssetManager();
         resourceManager = new ResourceManager();
         resourceManager.initAllResources();
 
-        viewport = new FitViewport(189, 100);
+        viewport = new FitViewport(180, 120);
         sceneLoader = new SceneLoader();
         sceneLoader.loadScene(NullConstants.TITLE_SCREEN, viewport);
-
-
-        final SimpleImageVO vo = new SimpleImageVO();
-        vo.imageName = "HowtoPlay.png";
-        final Entity entity = new Entity();
 
         root = new ItemWrapper(sceneLoader.getRoot());
 
@@ -46,7 +40,7 @@ public class PlatformerTutorial extends ApplicationAdapter {
         root.getChild("beginbutton").getEntity().getComponent(ButtonComponent.class).addListener(new ButtonComponent.ButtonListener() {
             @Override
             public void touchUp() {
-                this.level();
+                level();
             }
 
             @Override
@@ -57,26 +51,16 @@ public class PlatformerTutorial extends ApplicationAdapter {
             @Override
             public void clicked() {
 
-            }
-
-            //holds the MainScene
-            private void level() {
-                sceneLoader = new SceneLoader(resourceManager);
-                sceneLoader.loadScene(NullConstants.MAIN_SCENE, viewport);
-                root = new ItemWrapper(sceneLoader.getRoot());
-                player = new Player(sceneLoader.world);
-                root.getChild(NullConstants.PLAYER).addScript(player);
-
-                uiStage = new UIStage(sceneLoader.getRm());
-
-                sceneLoader.addComponentsByTagName(NullConstants.PLATFORM, PlatformComponent.class);
-                sceneLoader.getEngine().addSystem(new PlatformSystem());
-                playing = true;
             }
         });
-        root.getChild("HowButton").getEntity().getComponent(ButtonComponent.class).addListener(new ButtonComponent.ButtonListener() {
+        root.getChild("howtoplay").getEntity().getComponent(ButtonComponent.class).addListener(new ButtonComponent.ButtonListener() {
             @Override
             public void touchUp() {
+                SimpleImageVO HowtoPlay = new SimpleImageVO();
+                HowtoPlay.imageName = "HowtoPlay";
+                HowtoPlay.x = 55;
+                HowtoPlay.y = 20;
+                sceneLoader.entityFactory.createEntity(sceneLoader.getRoot(), HowtoPlay);
             }
 
             @Override
@@ -87,31 +71,67 @@ public class PlatformerTutorial extends ApplicationAdapter {
             @Override
             public void clicked() {
 
-            }
-            private void howtoplay() {
-                sceneLoader = new SceneLoader();
-                sceneLoader.loadScene(NullConstants.HOW_TO_PLAY, viewport);
-                root = new ItemWrapper(sceneLoader.getRoot());
-
-                sceneLoader.addComponentsByTagName(NullConstants.PLATFORM, PlatformComponent.class);
-                sceneLoader.getEngine().addSystem(new PlatformSystem());
             }
         });
     }
 
-
-
     public void render() {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
+        if (playing)
+            Gdx.gl.glClearColor(0, 0, 0, 0.2f);
+        else
+            Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         sceneLoader.getEngine().update(Gdx.graphics.getDeltaTime());
 
         //if the gameplay scene is up
-        if(playing) {
+        if (playing) {
             uiStage.act();
             uiStage.draw();
             ((OrthographicCamera) viewport.getCamera()).position.x = player.getX() + player.getWidth() / 2f;
-            ((OrthographicCamera) viewport.getCamera()).position.y = player.getY() + player.getWidth() / 2f;
+            if (player.getY() > 0)
+                ((OrthographicCamera) viewport.getCamera()).position.y = player.getY() + player.getWidth() / 2f;
+            if(player.getY() < -20)
+            {
+                uiStage.clear();
+                gameOver();
+            }
         }
+    }
+
+    public static void level(){
+        sceneLoader = new SceneLoader(resourceManager);
+        sceneLoader.loadScene(NullConstants.MAIN_SCENE, viewport);
+        root = new ItemWrapper(sceneLoader.getRoot());
+        player = new Player(sceneLoader.world);
+        root.getChild(NullConstants.PLAYER).addScript(player);
+
+        uiStage = new UIStage(sceneLoader.getRm());
+
+        sceneLoader.addComponentsByTagName(NullConstants.PLATFORM, PlatformComponent.class);
+        sceneLoader.getEngine().addSystem(new PlatformSystem());
+        playing = true;
+    }
+
+    public static void gameOver() {
+        sceneLoader = new SceneLoader();
+        sceneLoader.loadScene(NullConstants.GAME_OVER, viewport);
+        root = new ItemWrapper(sceneLoader.getRoot());
+        sceneLoader.addComponentsByTagName("button", ButtonComponent.class);
+        root.getChild("retry").getEntity().getComponent(ButtonComponent.class).addListener(new ButtonComponent.ButtonListener() {
+            @Override
+            public void touchUp() {
+
+            }
+
+            @Override
+            public void touchDown() {
+
+            }
+
+            @Override
+            public void clicked() {
+                System.out.print("yes");
+            }
+        });
     }
 }
