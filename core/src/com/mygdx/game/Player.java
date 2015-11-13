@@ -80,6 +80,12 @@ public class Player implements IScript {
     private void jumpShootingState(){
         spriteAnimationStateComponent.set(spriteAnimationComponent.frameRangeMap.get("jumpshooting"), 13, Animation.PlayMode.LOOP);
     }
+    private void standShootingState(){
+        spriteAnimationStateComponent.set(spriteAnimationComponent.frameRangeMap.get("standshoot"), 13, Animation.PlayMode.LOOP);
+    }
+    private void walkShootingState(){
+        spriteAnimationStateComponent.set(spriteAnimationComponent.frameRangeMap.get("walkshoot"), 13, Animation.PlayMode.LOOP);
+    }
 
     @Override
     public void act(float delta) {
@@ -99,24 +105,24 @@ public class Player implements IScript {
         if(!landed()) {
             jumpingState();
             stopJumpAnimation = false;
+            if(shoot)
+                jumpShootingState();
         }
         if((right|| left) && landed() && !stopJumpAnimation) {
             walkingState();
             stopJumpAnimation = true;
+            if(shoot)
+                walkShootingState();
         }
         if(!(left || right)&& landed()){
             standingState();
             stopJumpAnimation = false;
+            if(shoot)
+                standShootingState();
         }
-        if(!(left || right)&& landed() && shoot)
-        {
-
-        }
-
         speed.y += gravity*delta;
         transformComponent.y += speed.y * delta;
         rayCast();
-        checkForBodyCollision();
 
     }
     public static void moveLeft(boolean yes)
@@ -163,26 +169,6 @@ public class Player implements IScript {
                 return 0;
             }
         }, yrayFrom, yrayTo);
-    }
-    private void checkForBodyCollision(){
-        float xrayGap = (dimensionsComponent.width) / 2;
-        float xraySize = 2;
-
-        if(speed.x > 0)
-            return;
-        Vector2 xrayFrom = new Vector2((transformComponent.y + (dimensionsComponent.height/2)) * PhysicsBodyLoader.getScale(),
-                (transformComponent.y + xrayGap) * PhysicsBodyLoader.getScale());
-        Vector2 xrayTo = new Vector2((transformComponent.y + dimensionsComponent.height/2) * PhysicsBodyLoader.getScale(),
-                (transformComponent.y - xraySize)* PhysicsBodyLoader.getScale());
-        world.rayCast(new RayCastCallback() {
-            @Override
-            public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
-                speed.x = 0;
-                transformComponent.x = point.x / PhysicsBodyLoader.getScale() + 0.01f;
-                return 0;
-            }
-        }, xrayFrom, xrayTo);
-
     }
 
     public boolean landed(){

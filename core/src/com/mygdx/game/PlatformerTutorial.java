@@ -90,7 +90,7 @@ public class PlatformerTutorial extends ApplicationAdapter {
             ((OrthographicCamera) viewport.getCamera()).position.x = player.getX() + player.getWidth() / 2f;
             if (player.getY() > 0)
                 ((OrthographicCamera) viewport.getCamera()).position.y = player.getY() + player.getWidth() / 2f;
-            if(player.getY() < -200)
+            if(player.getY() < -20)
             {
                 uiStage.clear();
                 gameOver();
@@ -117,7 +117,7 @@ public class PlatformerTutorial extends ApplicationAdapter {
         sceneLoader.loadScene(NullConstants.GAME_OVER, viewport);
         root = new ItemWrapper(sceneLoader.getRoot());
         sceneLoader.addComponentsByTagName("button", ButtonComponent.class);
-        root.getChild("retrybutton").getEntity().getComponent(ButtonComponent.class).addListener(new ButtonComponent.ButtonListener() {
+        root.getChild("retry").getEntity().getComponent(ButtonComponent.class).addListener(new ButtonComponent.ButtonListener() {
             @Override
             public void touchUp() {
 
@@ -130,7 +130,6 @@ public class PlatformerTutorial extends ApplicationAdapter {
 
             @Override
             public void clicked() {
-                level();
                 System.out.print("yes");
             }
         });
