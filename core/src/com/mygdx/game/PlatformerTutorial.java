@@ -90,7 +90,7 @@ public class PlatformerTutorial extends ApplicationAdapter {
             ((OrthographicCamera) viewport.getCamera()).position.x = player.getX() + player.getWidth() / 2f;
             if (player.getY() > 0)
                 ((OrthographicCamera) viewport.getCamera()).position.y = player.getY() + player.getWidth() / 2f;
-            if(player.getY() < -500)
+            if(player.getY() < -200)
             {
                 uiStage.clear();
                 gameOver();

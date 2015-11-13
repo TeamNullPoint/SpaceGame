@@ -108,6 +108,10 @@ public class Player implements IScript {
             standingState();
             stopJumpAnimation = false;
         }
+        if(!(left || right)&& landed() && shoot)
+        {
+
+        }
 
         speed.y += gravity*delta;
         transformComponent.y += speed.y * delta;
