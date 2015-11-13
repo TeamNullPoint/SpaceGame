@@ -1,0 +1,34 @@
+
+Hearts.png
+size: 392,392
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Hearts0001
+  rotate: false
+  xy: 1, 9
+  size: 25, 6
+  orig: 25, 6
+  offset: 0, 0
+  index: -1
+Hearts0002
+  rotate: false
+  xy: 1, 1
+  size: 25, 6
+  orig: 25, 6
+  offset: 0, 0
+  index: -1
+Hearts0003
+  rotate: false
+  xy: 28, 9
+  size: 25, 6
+  orig: 25, 6
+  offset: 0, 0
+  index: -1
+Hearts0004
+  rotate: false
+  xy: 28, 1
+  size: 25, 6
+  orig: 25, 6
+  offset: 0, 0
+  index: -1
