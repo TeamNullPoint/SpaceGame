@@ -50,26 +50,30 @@ public class EnemySystem extends IteratingSystem { // this class is in charge of
 
         Vector2 currentPlayerPosition = new Vector2(player.getX(), player.getY());
 
-
+        float dist = transformComponent.x - currentPlayerPosition.x;
          // player is not close to the enemy.
-
-        newPosition.x = (enemyComponent.originalPosition.x +
+        if(Math.abs(dist) >= 40) {
+            newPosition.x = (enemyComponent.originalPosition.x +
                     MathUtils.cos(enemyComponent.timePassed * MathUtils.degreesToRadians * 20f) * 20f)
                     * PhysicsBodyLoader.getScale();
-        newPosition.y = physicsBodyComponent.body.getPosition().y;
-        System.out.println("current player x,y = " +currentPlayerPosition.x+ "," +currentPlayerPosition.y);
-        System.out.println("enemy x,y = " +newPosition.x+ "," +newPosition.y);
-        System.out.println(currentPlayerPosition.dst(newPosition));
-            if(currentPlayerPosition.dst(newPosition) <= 20f) {
-                System.out.println("less than 20f");
-                System.out.println(differenceBtw(currentPlayerPosition.x, newPosition.x));
-                if(differenceBtw(currentPlayerPosition.x, newPosition.x) == -1) {
-                    newPosition.x = Math.abs(newPosition.x) * -1;
-                } else if(differenceBtw(currentPlayerPosition.x, newPosition.x) == 1) {
-                    newPosition.x = Math.abs(newPosition.x);
-                }
-            }
+            newPosition.y = physicsBodyComponent.body.getPosition().y;
+            physicsBodyComponent.body.setTransform(newPosition, physicsBodyComponent.body.getAngle());
+        } else {
 
+            newPosition.x = (enemyComponent.originalPosition.x +
+                    MathUtils.cos(enemyComponent.timePassed * MathUtils.degreesToRadians * 20f) * 20f)
+                    * PhysicsBodyLoader.getScale();
+            newPosition.y = physicsBodyComponent.body.getPosition().y;
+                System.out.println("less than 40f");
+                if (dist < 0) {
+                    newPosition.x = Math.abs(newPosition.x);
+                    System.out.println("dist <0");
+                } else {
+                    newPosition.x = Math.abs(newPosition.x) * -1;
+                    System.out.println("dist >0");
+                }
+
+        }
 
 
 
