@@ -104,7 +104,7 @@ public class PlatformerTutorial extends ApplicationAdapter {
     }
 
     public static void level(){
-        //sceneLoader = new SceneLoader(resourceManager);
+        sceneLoader = new SceneLoader(resourceManager);
         sceneLoader.loadScene(NullConstants.MAIN_SCENE, viewport);
         root = new ItemWrapper(sceneLoader.getRoot());
         player = new Player(sceneLoader.world);
@@ -113,10 +113,14 @@ public class PlatformerTutorial extends ApplicationAdapter {
         uiStage = new UIStage(sceneLoader.getRm());
 
         sceneLoader.addComponentsByTagName(NullConstants.PLATFORM, PlatformComponent.class);
-        sceneLoader.addComponentsByTagName(NullConstants.ENEMY, CollisionComponent.class);
+//        sceneLoader.addComponentsByTagName(NullConstants.ENEMY, CollisionComponent.class);
+        sceneLoader.addComponentsByTagName(NullConstants.ENEMY, EnemyComponent.class);
+
 
         sceneLoader.getEngine().addSystem(new PlatformSystem());
-        sceneLoader.getEngine().addSystem(new CollisionSystem(player));
+  //      sceneLoader.getEngine().addSystem(new CollisionSystem(player));
+        sceneLoader.getEngine().addSystem(new EnemySystem(player));
+
         playing = true;
     }
 
