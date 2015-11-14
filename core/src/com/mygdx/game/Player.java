@@ -65,6 +65,7 @@ public class Player implements IScript {
 
     }
 
+    //animations for various states
     private void walkingState(){
         spriteAnimationStateComponent.set(spriteAnimationComponent.frameRangeMap.get("walking"), 13, Animation.PlayMode.LOOP);
     }
@@ -111,6 +112,8 @@ public class Player implements IScript {
         checkForBodyCollision();
 
     }
+
+    //called when buttons are pressed
     public static void moveLeft(boolean yes)
     {
        left = yes;
