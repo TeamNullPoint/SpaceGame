@@ -35,19 +35,16 @@ public class Player implements IScript {
     private SpriteAnimationComponent spriteAnimationComponent;
     private SpriteAnimationStateComponent spriteAnimationStateComponent;
 
-
     private static boolean left = false;
     private static boolean right = false;
     private static boolean jump = false;
 
     private World world;
-
     public Player(World world) {
         this.world = world;
     }
 
-
-    private float gravity = -120f;
+    private final float gravity = -120f;
     private static Vector2 speed;
 
     private final float jumpSpeed = 66f;
@@ -55,14 +52,12 @@ public class Player implements IScript {
     @Override
     public void init(Entity entity) {
         player = entity;
-
         transformComponent = ComponentRetriever.get(entity, TransformComponent.class);
         dimensionsComponent = ComponentRetriever.get(entity, DimensionsComponent.class);
         spriteAnimationComponent = ComponentRetriever.get(entity, SpriteAnimationComponent.class);
         spriteAnimationStateComponent = ComponentRetriever.get(entity, SpriteAnimationStateComponent.class);
         ImmutableArray<Component> allComponents = entity.getComponents();
         speed = new Vector2(33, 0);
-
     }
 
     //animations for various states
@@ -92,6 +87,7 @@ public class Player implements IScript {
         if(jump) {
             speed.y = jumpSpeed;
             grounded = false;
+            dojump(false);
         }
         if(!landed()) {
             jumpingState();
@@ -113,7 +109,7 @@ public class Player implements IScript {
 
     }
 
-    //called when buttons are pressed
+    //called when buttons in uiStage are pressed
     public static void moveLeft(boolean yes)
     {
        left = yes;
@@ -126,12 +122,7 @@ public class Player implements IScript {
     {
         jump = yes;
     }
-    public static void doshoot(boolean yes)
-    {
-    }
-
-
-
+    public static void doshoot(boolean yes) {}
 
     private void rayCast() {
         float rayGap = (dimensionsComponent.height) / 2;
@@ -186,7 +177,6 @@ public class Player implements IScript {
     public boolean landed(){
         return grounded;
     }
-
     public float getX() {
         return transformComponent.x;
     }

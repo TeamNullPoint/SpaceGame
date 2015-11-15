@@ -24,6 +24,7 @@ public class PlatformerTutorial extends ApplicationAdapter {
     private static UIStage uiStage;
     private static ItemWrapper root;
     private static Boolean playing = false;
+    private Boolean dead = false;
 
 
     @Override
@@ -33,26 +34,24 @@ public class PlatformerTutorial extends ApplicationAdapter {
         resourceManager.initAllResources();
 
         viewport = new FitViewport(180, 120);
-        sceneLoader = new SceneLoader();
+        sceneLoader = new SceneLoader(resourceManager);
 
         sceneLoader.loadScene(NullConstants.TITLE_SCREEN, viewport);
 
         root = new ItemWrapper(sceneLoader.getRoot());
 
         sceneLoader.addComponentsByTagName("button", ButtonComponent.class);
-
-
-
-
         root.getChild("beginbutton").getEntity().getComponent(ButtonComponent.class).addListener(new ButtonComponent.ButtonListener() {
 
             @Override
             public void touchUp() {
                 level();
             }
+
             @Override
             public void touchDown() {
             }
+
             @Override
             public void clicked() {
             }
@@ -67,7 +66,6 @@ public class PlatformerTutorial extends ApplicationAdapter {
                 HowtoPlay.y = 20;
                 sceneLoader.entityFactory.createEntity(sceneLoader.getRoot(), HowtoPlay);
             }
-
             @Override
             public void touchDown() {
 
@@ -95,10 +93,10 @@ public class PlatformerTutorial extends ApplicationAdapter {
             ((OrthographicCamera) viewport.getCamera()).position.x = player.getX() + player.getWidth() / 2f;
             if (player.getY() > 0)
                 ((OrthographicCamera) viewport.getCamera()).position.y = player.getY() + player.getWidth() / 2f;
-            if(player.getY() < -20)
+            if(player.getY() < -100 && !dead)
             {
-                uiStage.clear();
-                gameOver();
+                uiStage.gameOver();
+                dead = true;
             }
         }
     }
@@ -114,36 +112,11 @@ public class PlatformerTutorial extends ApplicationAdapter {
 
         sceneLoader.addComponentsByTagName(NullConstants.PLATFORM, PlatformComponent.class);
 //        sceneLoader.addComponentsByTagName(NullConstants.ENEMY, CollisionComponent.class);
-        sceneLoader.addComponentsByTagName(NullConstants.ENEMY, EnemyComponent.class);
-
+        //sceneLoader.addComponentsByTagName(NullConstants.ENEMY, EnemyComponent.class);
 
         sceneLoader.getEngine().addSystem(new PlatformSystem());
   //      sceneLoader.getEngine().addSystem(new CollisionSystem(player));
-        sceneLoader.getEngine().addSystem(new EnemySystem(player));
-
+        //sceneLoader.getEngine().addSystem(new EnemySystem(player));
         playing = true;
-    }
-
-    public static void gameOver() {
-        sceneLoader = new SceneLoader();
-        sceneLoader.loadScene(NullConstants.GAME_OVER, viewport);
-        root = new ItemWrapper(sceneLoader.getRoot());
-        sceneLoader.addComponentsByTagName("button", ButtonComponent.class);
-        root.getChild("retry").getEntity().getComponent(ButtonComponent.class).addListener(new ButtonComponent.ButtonListener() {
-            @Override
-            public void touchUp() {
-
-            }
-
-            @Override
-            public void touchDown() {
-
-            }
-
-            @Override
-            public void clicked() {
-                System.out.print("yes");
-            }
-        });
     }
 }

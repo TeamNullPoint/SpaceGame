@@ -1,14 +1,8 @@
 package com.mygdx.game;
 
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.scenes.scene2d.*;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.uwsoft.editor.renderer.SceneLoader;
-import com.uwsoft.editor.renderer.components.additional.ButtonComponent;
 import com.uwsoft.editor.renderer.data.CompositeItemVO;
 import com.uwsoft.editor.renderer.data.ProjectInfoVO;
 import com.uwsoft.editor.renderer.resources.IResourceRetriever;
@@ -20,6 +14,9 @@ import com.uwsoft.editor.renderer.scene2d.CompositeActor;
 public class UIStage extends Stage {
 
     private int numberHits = 0;
+
+    CompositeActor retryActor;
+
     public UIStage(IResourceRetriever ir){
 
         Gdx.input.setInputProcessor(this);
@@ -31,6 +28,7 @@ public class UIStage extends Stage {
         CompositeItemVO abuttondata = projectInfo.libraryItems.get("abutton");
         CompositeItemVO bbuttondata = projectInfo.libraryItems.get("bbutton");
         CompositeItemVO health = projectInfo.libraryItems.get("health");
+        CompositeItemVO retry = projectInfo.libraryItems.get("retrybutton");
 
         //create actors from button data
         CompositeActor leftbuttonActor = new CompositeActor(leftbuttondata, ir);
@@ -38,6 +36,7 @@ public class UIStage extends Stage {
         CompositeActor abuttonActor = new CompositeActor(abuttondata, ir);
         CompositeActor bbuttonActor = new CompositeActor(bbuttondata, ir);
         CompositeActor healthActor = new CompositeActor(health, ir);
+        retryActor = new CompositeActor(retry, ir);
 
         //add buttons to screen
         addActor(leftbuttonActor);
@@ -86,14 +85,9 @@ public class UIStage extends Stage {
         });
         abuttonActor.addListener(new ClickListener() {
             @Override
-            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
                 Player.dojump(true);
                 return true;
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                Player.dojump(false);
             }
         });
         bbuttonActor.addListener(new ClickListener() {
@@ -111,5 +105,18 @@ public class UIStage extends Stage {
     public void hit()
     {
         numberHits++;
+    }
+
+    public void gameOver(){
+        addActor(retryActor);
+        retryActor.setX(300);
+        retryActor.setY(200);
+
+        retryActor.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.print("yes");
+            }
+        });
     }
 }
