@@ -23,6 +23,8 @@ public class EnemySystem extends IteratingSystem { // this class is in charge of
         super(Family.all(EnemyComponent.class).get());
         this.player = player;
     }
+
+    private float currentX;
     //We must create a component mapper for this system that maps all components of a type to it for
     //management.
     private ComponentMapper<EnemyComponent> enemyComponentMapper = ComponentMapper.getFor(EnemyComponent.class);
@@ -42,55 +44,56 @@ public class EnemySystem extends IteratingSystem { // this class is in charge of
 
         if(enemyComponent.originalPosition == null){
             enemyComponent.originalPosition = new Vector2(transformComponent.x, transformComponent.y);
+            enemyComponent.currentPosition = new Vector2(enemyComponent.originalPosition);
             enemyComponent.timePassed = MathUtils.random(0, 100);
+
         }
 
-        enemyComponent.timePassed += deltaTime;
-        Vector2 newPosition = new Vector2();
 
-        Vector2 currentPlayerPosition = new Vector2(player.getX(), player.getY());
 
-        float dist = transformComponent.x - currentPlayerPosition.x;
+//
+       Vector2 currentPlayerPosition = new Vector2(player.getX(), player.getY());
+
+        float dist = enemyComponent.currentPosition.x - currentPlayerPosition.x;
+        //System.out.println("enemyposition = " + enemyComponent.currentPosition.x + "current player x =" + currentPlayerPosition.x);
+        System.out.println(dist);
          // player is not close to the enemy.
-        if(Math.abs(dist) >= 40) {
-            newPosition.x = (enemyComponent.originalPosition.x +
-                    MathUtils.cos(enemyComponent.timePassed * MathUtils.degreesToRadians * 20f) * 20f)
-                    * PhysicsBodyLoader.getScale();
-            newPosition.y = physicsBodyComponent.body.getPosition().y;
-            physicsBodyComponent.body.setTransform(newPosition, physicsBodyComponent.body.getAngle());
+        if(Math.abs(dist) >= 30) {
+
+
+            enemyComponent.timePassed += deltaTime;
+
+            enemyComponent.currentPosition.x = (enemyComponent.originalPosition.x +
+                        MathUtils.cos(enemyComponent.timePassed * MathUtils.degreesToRadians * 20f) * 20f)
+                        * PhysicsBodyLoader.getScale();
+
+        //System.out.println(Math.abs(MathUtils.cos(enemyComponent.timePassed * MathUtils.degreesToRadians * 20f) * 20f));
+        //System.out.println(enemyComponent.originalPosition.x);
+            enemyComponent.currentPosition.y = physicsBodyComponent.body.getPosition().y;
+
+
         } else {
 
-            newPosition.x = (enemyComponent.originalPosition.x +
-                    MathUtils.cos(enemyComponent.timePassed * MathUtils.degreesToRadians * 20f) * 20f)
-                    * PhysicsBodyLoader.getScale();
-            newPosition.y = physicsBodyComponent.body.getPosition().y;
-                System.out.println("less than 40f");
+            enemyComponent.currentPosition.y = physicsBodyComponent.body.getPosition().y;
+          //      System.out.println("less than 40f");
                 if (dist < 0) {
-                    newPosition.x = Math.abs(newPosition.x);
-                    System.out.println("dist <0");
+
+
+//                    System.out.println("dist<0 player = " +currentPlayerPosition.x +"| enemy ="+enemyComponent.currentPosition.x);
+            //        System.out.println("dist <0");
+
                 } else {
-                    newPosition.x = Math.abs(newPosition.x) * -1;
-                    System.out.println("dist >0");
+                    //enemyComponent.currentPosition.x -= 33*deltaTime;
+    //                System.out.println(enemyComponent.currentPosition.x);
+   //                 System.out.println("dist>0 player = " + currentPlayerPosition.x + "| enemy =" + enemyComponent.currentPosition.x);
+              //      System.out.println("dist >0");
+
                 }
 
+
         }
-
-
-
-        physicsBodyComponent.body.setTransform(newPosition, physicsBodyComponent.body.getAngle());
-
-
+        physicsBodyComponent.body.setTransform(enemyComponent.currentPosition, physicsBodyComponent.body.getAngle());
     }
 
-    private int differenceBtw(float a, float b) {
-        int direction = 1;
-        if(a == b) {
-            direction = 0;
-        } else if(a < b) {
-            direction = -1;
-        }
-
-        return direction;
-    }
 
 }

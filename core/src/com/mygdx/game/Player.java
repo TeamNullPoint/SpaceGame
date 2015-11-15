@@ -82,6 +82,7 @@ public class Player implements IScript {
     public void act(float delta) {
         if(left) {
             transformComponent.x -= speed.x * delta;
+
             transformComponent.scaleX = -1f;
         }
         if(right) {

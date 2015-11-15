@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class EnemyComponent implements Component {
     Vector2 originalPosition;
+    Vector2 currentPosition;
     float timePassed = 0;
     public EnemyComponent(){
     }
