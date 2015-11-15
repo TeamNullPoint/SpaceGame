@@ -38,16 +38,17 @@ public class Player implements IScript {
     private static boolean left = false;
     private static boolean right = false;
     private static boolean jump = false;
+    private static boolean shoot = false;
 
     private World world;
     public Player(World world) {
         this.world = world;
     }
 
-    private final float gravity = -120f;
+    private final float gravity = NullConstants.GRAVITY;
     private static Vector2 speed;
 
-    private final float jumpSpeed = 66f;
+    private final float jumpSpeed = NullConstants.PLAYER_JUMP;
 
     @Override
     public void init(Entity entity) {
@@ -150,7 +151,7 @@ public class Player implements IScript {
     }
 
     private void checkForBodyCollision(){
-        float rayGap = (dimensionsComponent.width) / 2;
+        float rayGap = (dimensionsComponent.width) / 4;
         float raySize = 2;
 
         if(speed.x > 0) return;

@@ -24,7 +24,7 @@ public class PlatformerTutorial extends ApplicationAdapter {
     private static UIStage uiStage;
     private static ItemWrapper root;
     private static Boolean playing = false;
-    private Boolean dead = false;
+    private static Boolean dead = false;
 
 
     @Override
@@ -40,8 +40,10 @@ public class PlatformerTutorial extends ApplicationAdapter {
 
         root = new ItemWrapper(sceneLoader.getRoot());
 
-        sceneLoader.addComponentsByTagName("button", ButtonComponent.class);
-        root.getChild("beginbutton").getEntity().getComponent(ButtonComponent.class).addListener(new ButtonComponent.ButtonListener() {
+        sceneLoader.addComponentsByTagName(NullConstants.BUTTON, ButtonComponent.class);
+
+        //creates begin button if pressed begin level
+        root.getChild(NullConstants.BEGIN_BUTTON).getEntity().getComponent(ButtonComponent.class).addListener(new ButtonComponent.ButtonListener() {
 
             @Override
             public void touchUp() {
@@ -57,7 +59,8 @@ public class PlatformerTutorial extends ApplicationAdapter {
             }
         });
 
-        root.getChild("howtoplay").getEntity().getComponent(ButtonComponent.class).addListener(new ButtonComponent.ButtonListener() {
+        //if how to play button pressed create how to play image
+        root.getChild(NullConstants.HOW_TO_PLAY).getEntity().getComponent(ButtonComponent.class).addListener(new ButtonComponent.ButtonListener() {
             @Override
             public void touchUp() {
                 SimpleImageVO HowtoPlay = new SimpleImageVO();
@@ -70,7 +73,6 @@ public class PlatformerTutorial extends ApplicationAdapter {
             public void touchDown() {
 
             }
-
             @Override
             public void clicked() {
 
@@ -88,12 +90,19 @@ public class PlatformerTutorial extends ApplicationAdapter {
 
         //if the gameplay scene is up
         if (playing) {
+            //create uistage
             uiStage.act();
             uiStage.draw();
-            ((OrthographicCamera) viewport.getCamera()).position.x = player.getX() + player.getWidth() / 2f;
-            if (player.getY() > 0)
+
+            if(!dead)
+                ((OrthographicCamera) viewport.getCamera()).position.x = player.getX() + player.getWidth() / 2f;
+
+            //if player not fallen follow with camera
+            if (player.getY() > NullConstants.GROUND_LEVEL)
                 ((OrthographicCamera) viewport.getCamera()).position.y = player.getY() + player.getWidth() / 2f;
-            if(player.getY() < -100 && !dead)
+
+            //if player not dead and falls to death zone then game over
+            if(player.getY() < NullConstants.DEATH_ZONE && !dead)
             {
                 uiStage.gameOver();
                 dead = true;
@@ -118,5 +127,6 @@ public class PlatformerTutorial extends ApplicationAdapter {
   //      sceneLoader.getEngine().addSystem(new CollisionSystem(player));
         //sceneLoader.getEngine().addSystem(new EnemySystem(player));
         playing = true;
+        dead = false;
     }
 }

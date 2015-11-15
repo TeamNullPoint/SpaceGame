@@ -105,9 +105,12 @@ public class UIStage extends Stage {
     public void hit()
     {
         numberHits++;
+        if(numberHits == 2)
+            gameOver();
     }
 
     public void gameOver(){
+        //create retry button
         addActor(retryActor);
         retryActor.setX(300);
         retryActor.setY(200);
@@ -115,7 +118,8 @@ public class UIStage extends Stage {
         retryActor.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.print("yes");
+                PlatformerTutorial.level();
+                retryActor.clear();
             }
         });
     }
