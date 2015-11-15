@@ -1,14 +1,9 @@
 package com.mygdx.game;
 
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.scenes.scene2d.*;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.uwsoft.editor.renderer.SceneLoader;
-import com.uwsoft.editor.renderer.components.additional.ButtonComponent;
 import com.uwsoft.editor.renderer.data.CompositeItemVO;
 import com.uwsoft.editor.renderer.data.ProjectInfoVO;
 import com.uwsoft.editor.renderer.resources.IResourceRetriever;
@@ -20,7 +15,8 @@ import com.uwsoft.editor.renderer.scene2d.CompositeActor;
 public class UIStage extends Stage {
 
     private int numberHits = 0;
-    public UIStage(IResourceRetriever ir){
+
+    public UIStage(IResourceRetriever ir) {
 
         Gdx.input.setInputProcessor(this);
         ProjectInfoVO projectInfo = ir.getProjectVO();
@@ -62,13 +58,13 @@ public class UIStage extends Stage {
         leftbuttonActor.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    Player.moveLeft(true);
+                Player.moveLeft(true);
                 return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    Player.moveLeft(false);
+                Player.moveLeft(false);
             }
         });
 
@@ -102,14 +98,15 @@ public class UIStage extends Stage {
                 Player.doshoot(true);
                 return true;
             }
+
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 Player.doshoot(false);
             }
         });
     }
-    public void hit()
-    {
+
+    public void hit() {
         numberHits++;
     }
 }

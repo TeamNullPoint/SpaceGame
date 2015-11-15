@@ -4,12 +4,13 @@ import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * Created by Jaden on 13/11/2015.
+ * The component for an enemy.
  */
 public class EnemyComponent implements Component {
     Vector2 originalPosition;
     Vector2 currentPosition;
     float timePassed = 0;
-    public EnemyComponent(){
+    Vector2 speed = new Vector2(33, 0);
+    public EnemyComponent() {
     }
 }
