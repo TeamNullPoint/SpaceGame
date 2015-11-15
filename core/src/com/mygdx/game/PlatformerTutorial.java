@@ -1,10 +1,9 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.ai.steer.limiters.NullLimiter;
-import com.badlogic.gdx.ai.steer.utils.Collision;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.ai.steer.limiters.NullLimiter;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -19,13 +18,57 @@ public class PlatformerTutorial extends ApplicationAdapter {
     private static SceneLoader sceneLoader;
     private static Viewport viewport;
     private static ResourceManager resourceManager;
-    private AssetManager assetManager;
     private static Player player;
     private static UIStage uiStage;
     private static ItemWrapper root;
     private static Boolean playing = false;
-    private static Boolean dead = false;
+    private AssetManager assetManager;
 
+    public static void level() {
+        sceneLoader = new SceneLoader(resourceManager);
+        sceneLoader.loadScene(NullConstants.MAIN_SCENE, viewport);
+        root = new ItemWrapper(sceneLoader.getRoot());
+
+        player = new Player(sceneLoader.world);
+
+        root.getChild(NullConstants.PLAYER).addScript(player);
+
+        uiStage = new UIStage(sceneLoader.getRm());
+
+        sceneLoader.addComponentsByTagName(NullConstants.PLATFORM, PlatformComponent.class);
+        sceneLoader.addComponentsByTagName(NullConstants.ENEMY, EnemyComponent.class);
+        sceneLoader.addComponentsByTagName(NullConstants.ENEMY, CollisionComponent.class);
+
+        sceneLoader.getEngine().addSystem(new PlatformSystem());
+
+        sceneLoader.getEngine().addSystem(new EnemySystem(player, sceneLoader.world));
+        sceneLoader.getEngine().addSystem(new CollisionSystem(player));
+
+        playing = true;
+    }
+
+    public static void gameOver() {
+        sceneLoader = new SceneLoader();
+        sceneLoader.loadScene(NullConstants.GAME_OVER, viewport);
+        root = new ItemWrapper(sceneLoader.getRoot());
+        sceneLoader.addComponentsByTagName("button", ButtonComponent.class);
+        root.getChild("retry").getEntity().getComponent(ButtonComponent.class).addListener(new ButtonComponent.ButtonListener() {
+            @Override
+            public void touchUp() {
+
+            }
+
+            @Override
+            public void touchDown() {
+
+            }
+
+            @Override
+            public void clicked() {
+                System.out.print("yes");
+            }
+        });
+    }
 
     @Override
     public void create() {
@@ -34,16 +77,16 @@ public class PlatformerTutorial extends ApplicationAdapter {
         resourceManager.initAllResources();
 
         viewport = new FitViewport(180, 120);
-        sceneLoader = new SceneLoader(resourceManager);
+        sceneLoader = new SceneLoader();
 
         sceneLoader.loadScene(NullConstants.TITLE_SCREEN, viewport);
 
         root = new ItemWrapper(sceneLoader.getRoot());
 
-        sceneLoader.addComponentsByTagName(NullConstants.BUTTON, ButtonComponent.class);
+        sceneLoader.addComponentsByTagName("button", ButtonComponent.class);
 
-        //creates begin button if pressed begin level
-        root.getChild(NullConstants.BEGIN_BUTTON).getEntity().getComponent(ButtonComponent.class).addListener(new ButtonComponent.ButtonListener() {
+
+        root.getChild("beginbutton").getEntity().getComponent(ButtonComponent.class).addListener(new ButtonComponent.ButtonListener() {
 
             @Override
             public void touchUp() {
@@ -59,8 +102,7 @@ public class PlatformerTutorial extends ApplicationAdapter {
             }
         });
 
-        //if how to play button pressed create how to play image
-        root.getChild(NullConstants.HOW_TO_PLAY).getEntity().getComponent(ButtonComponent.class).addListener(new ButtonComponent.ButtonListener() {
+        root.getChild("howtoplay").getEntity().getComponent(ButtonComponent.class).addListener(new ButtonComponent.ButtonListener() {
             @Override
             public void touchUp() {
                 SimpleImageVO HowtoPlay = new SimpleImageVO();
@@ -69,10 +111,12 @@ public class PlatformerTutorial extends ApplicationAdapter {
                 HowtoPlay.y = 20;
                 sceneLoader.entityFactory.createEntity(sceneLoader.getRoot(), HowtoPlay);
             }
+
             @Override
             public void touchDown() {
 
             }
+
             @Override
             public void clicked() {
 
@@ -90,43 +134,15 @@ public class PlatformerTutorial extends ApplicationAdapter {
 
         //if the gameplay scene is up
         if (playing) {
-            //create uistage
             uiStage.act();
             uiStage.draw();
-
-            if(!dead)
-                ((OrthographicCamera) viewport.getCamera()).position.x = player.getX() + player.getWidth() / 2f;
-
-            //if player not fallen follow with camera
-            if (player.getY() > NullConstants.GROUND_LEVEL)
+            ((OrthographicCamera) viewport.getCamera()).position.x = player.getX() + player.getWidth() / 2f;
+            if (player.getY() > 0)
                 ((OrthographicCamera) viewport.getCamera()).position.y = player.getY() + player.getWidth() / 2f;
-
-            //if player not dead and falls to death zone then game over
-            if(player.getY() < NullConstants.DEATH_ZONE && !dead)
-            {
-                uiStage.gameOver();
-                dead = true;
+            if (player.getY() < -20) {
+                uiStage.clear();
+                gameOver();
             }
         }
-    }
-
-    public static void level(){
-        sceneLoader = new SceneLoader(resourceManager);
-        sceneLoader.loadScene(NullConstants.MAIN_SCENE, viewport);
-        root = new ItemWrapper(sceneLoader.getRoot());
-        player = new Player(sceneLoader.world);
-        root.getChild(NullConstants.PLAYER).addScript(player);
-
-        uiStage = new UIStage(sceneLoader.getRm());
-
-        sceneLoader.addComponentsByTagName(NullConstants.PLATFORM, PlatformComponent.class);
-//        sceneLoader.addComponentsByTagName(NullConstants.ENEMY, CollisionComponent.class);
-        //sceneLoader.addComponentsByTagName(NullConstants.ENEMY, EnemyComponent.class);
-
-        sceneLoader.getEngine().addSystem(new PlatformSystem());
-  //      sceneLoader.getEngine().addSystem(new CollisionSystem(player));
-        //sceneLoader.getEngine().addSystem(new EnemySystem(player));
-        playing = true;
-        dead = false;
     }
 }

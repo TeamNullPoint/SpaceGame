@@ -1,7 +1,8 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.*;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.uwsoft.editor.renderer.data.CompositeItemVO;
 import com.uwsoft.editor.renderer.data.ProjectInfoVO;
@@ -15,9 +16,7 @@ public class UIStage extends Stage {
 
     private int numberHits = 0;
 
-    CompositeActor retryActor;
-
-    public UIStage(IResourceRetriever ir){
+    public UIStage(IResourceRetriever ir) {
 
         Gdx.input.setInputProcessor(this);
         ProjectInfoVO projectInfo = ir.getProjectVO();
@@ -28,7 +27,6 @@ public class UIStage extends Stage {
         CompositeItemVO abuttondata = projectInfo.libraryItems.get("abutton");
         CompositeItemVO bbuttondata = projectInfo.libraryItems.get("bbutton");
         CompositeItemVO health = projectInfo.libraryItems.get("health");
-        CompositeItemVO retry = projectInfo.libraryItems.get("retrybutton");
 
         //create actors from button data
         CompositeActor leftbuttonActor = new CompositeActor(leftbuttondata, ir);
@@ -36,7 +34,6 @@ public class UIStage extends Stage {
         CompositeActor abuttonActor = new CompositeActor(abuttondata, ir);
         CompositeActor bbuttonActor = new CompositeActor(bbuttondata, ir);
         CompositeActor healthActor = new CompositeActor(health, ir);
-        retryActor = new CompositeActor(retry, ir);
 
         //add buttons to screen
         addActor(leftbuttonActor);
@@ -61,13 +58,13 @@ public class UIStage extends Stage {
         leftbuttonActor.addListener(new ClickListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-                    Player.moveLeft(true);
+                Player.moveLeft(true);
                 return true;
             }
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                    Player.moveLeft(false);
+                Player.moveLeft(false);
             }
         });
 
@@ -85,9 +82,14 @@ public class UIStage extends Stage {
         });
         abuttonActor.addListener(new ClickListener() {
             @Override
-            public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+            public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
                 Player.dojump(true);
                 return true;
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                Player.dojump(false);
             }
         });
         bbuttonActor.addListener(new ClickListener() {
@@ -96,31 +98,15 @@ public class UIStage extends Stage {
                 Player.doshoot(true);
                 return true;
             }
+
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 Player.doshoot(false);
             }
         });
     }
-    public void hit()
-    {
+
+    public void hit() {
         numberHits++;
-        if(numberHits == 2)
-            gameOver();
-    }
-
-    public void gameOver(){
-        //create retry button
-        addActor(retryActor);
-        retryActor.setX(300);
-        retryActor.setY(200);
-
-        retryActor.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                PlatformerTutorial.level();
-                retryActor.clear();
-            }
-        });
     }
 }
