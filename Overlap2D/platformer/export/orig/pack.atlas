@@ -6,7 +6,7 @@ filter: Linear,Linear
 repeat: none
 AButton (1)
   rotate: false
-  xy: 582, 165
+  xy: 1670, 762
   size: 60, 33
   split: 0, 0, 0, 0
   orig: 60, 33
@@ -14,28 +14,28 @@ AButton (1)
   index: -1
 AlienBigGrass
   rotate: false
-  xy: 934, 878
+  xy: 1765, 1302
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 AlienFirepit
   rotate: false
-  xy: 1832, 1402
+  xy: 1670, 797
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 AlienFlower
   rotate: false
-  xy: 1969, 1498
+  xy: 934, 762
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 AlienTree
   rotate: false
-  xy: 1864, 1584
+  xy: 1864, 1582
   size: 150, 140
   split: 0, 0, 94, 29
   orig: 150, 140
@@ -43,7 +43,7 @@ AlienTree
   index: -1
 AlienTree2
   rotate: false
-  xy: 1765, 904
+  xy: 1670, 1025
   size: 150, 140
   split: 0, 0, 100, 28
   orig: 150, 140
@@ -51,28 +51,21 @@ AlienTree2
   index: -1
 Alienbush
   rotate: false
-  xy: 1670, 779
+  xy: 934, 872
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 Aliengrass
   rotate: false
-  xy: 2, 4
+  xy: 2, 2
   size: 150, 20
   orig: 150, 20
   offset: 0, 0
   index: -1
-Asteroid
-  rotate: false
-  xy: 934, 944
-  size: 92, 76
-  orig: 92, 76
-  offset: 0, 0
-  index: -1
 BButton
   rotate: false
-  xy: 714, 55
+  xy: 1732, 762
   size: 60, 33
   split: 0, 0, 0, 0
   orig: 60, 33
@@ -80,14 +73,14 @@ BButton
   index: -1
 BeginButton
   rotate: false
-  xy: 714, 37
+  xy: 231, 6
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: -1
 Cloud
   rotate: false
-  xy: 582, 200
+  xy: 1832, 1400
   size: 64, 64
   split: 27, 14, 21, 36
   orig: 64, 64
@@ -95,21 +88,21 @@ Cloud
   index: -1
 Done
   rotate: false
-  xy: 556, 10
+  xy: 1765, 1222
   size: 60, 12
   orig: 60, 12
   offset: 0, 0
   index: -1
 Game over
   rotate: false
-  xy: 1765, 774
+  xy: 1670, 895
   size: 128, 128
   orig: 128, 128
   offset: 0, 0
   index: -1
 Goldprogress
   rotate: false
-  xy: 1992, 1944
+  xy: 1992, 1942
   size: 30, 102
   split: 9, 9, 9, 9
   orig: 30, 102
@@ -117,21 +110,21 @@ Goldprogress
   index: -1
 Gray
   rotate: false
-  xy: 2, 26
+  xy: 2, 24
   size: 320, 320
   orig: 320, 320
   offset: 0, 0
   index: -1
 Green
   rotate: false
-  xy: 2, 348
+  xy: 2, 346
   size: 672, 672
   orig: 672, 672
   offset: 0, 0
   index: -1
 GroundTexture
   rotate: false
-  xy: 1670, 764
+  xy: 934, 796
   size: 64, 8
   split: 0, 0, 0, 0
   orig: 64, 8
@@ -139,7 +132,7 @@ GroundTexture
   index: -1
 Health
   rotate: false
-  xy: 154, 6
+  xy: 154, 4
   size: 75, 18
   split: 0, 0, 0, 0
   orig: 75, 18
@@ -147,7 +140,7 @@ Health
   index: -1
 Hearts1
   rotate: false
-  xy: 297, 18
+  xy: 582, 171
   size: 25, 6
   split: 0, 0, 0, 0
   orig: 25, 6
@@ -155,28 +148,28 @@ Hearts1
   index: -1
 How to play
   rotate: false
-  xy: 1864, 1532
+  xy: 1864, 1530
   size: 147, 18
   orig: 147, 18
   offset: 0, 0
   index: -1
 HowtoPlay
   rotate: false
-  xy: 676, 764
+  xy: 676, 762
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 Jumpw-Gun
   rotate: false
-  xy: 1832, 1336
+  xy: 934, 806
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 Left Arrow
   rotate: false
-  xy: 1832, 1301
+  xy: 1898, 1431
   size: 60, 33
   split: 0, 0, 0, 0
   orig: 60, 33
@@ -184,14 +177,14 @@ Left Arrow
   index: -1
 Left Arrow (1)
   rotate: false
-  xy: 934, 777
+  xy: 1794, 762
   size: 60, 33
   orig: 60, 33
   offset: 0, 0
   index: -1
 LightPillar
   rotate: false
-  xy: 1028, 1406
+  xy: 1028, 1404
   size: 640, 640
   split: 450, 166, 227, 313
   pad: 578, 61, 134, 252
@@ -200,14 +193,14 @@ LightPillar
   index: -1
 OptionsButton
   rotate: false
-  xy: 231, 8
+  xy: 1832, 1382
   size: 64, 16
   orig: 64, 16
   offset: 0, 0
   index: -1
 Pillar1
   rotate: false
-  xy: 1028, 764
+  xy: 1028, 762
   size: 640, 640
   split: 126, 226, 208, 111
   pad: -1, -1, 209, 110
@@ -216,7 +209,7 @@ Pillar1
   index: -1
 Pillar2
   rotate: false
-  xy: 676, 122
+  xy: 676, 120
   size: 640, 640
   split: 165, 220, 304, 235
   pad: -1, -1, 305, 235
@@ -225,21 +218,21 @@ Pillar2
   index: -1
 Pressed
   rotate: false
-  xy: 556, 2
+  xy: 1992, 1934
   size: 27, 6
   orig: 27, 6
   offset: 0, 0
   index: -1
 PressedBegin
   rotate: false
-  xy: 1832, 1500
+  xy: 1832, 1498
   size: 135, 30
   orig: 135, 30
   offset: 0, 0
   index: -1
 RegPlatform (4)
   rotate: false
-  xy: 1864, 1552
+  xy: 1864, 1550
   size: 150, 30
   split: 0, 0, 0, 0
   orig: 150, 30
@@ -247,7 +240,7 @@ RegPlatform (4)
   index: -1
 RegularPlatform
   rotate: false
-  xy: 1670, 1726
+  xy: 1670, 1724
   size: 320, 320
   split: 108, 109, 58, 260
   pad: 46, 273, 61, 184
@@ -256,7 +249,7 @@ RegularPlatform
   index: -1
 RightArrow
   rotate: false
-  xy: 1898, 1367
+  xy: 582, 179
   size: 60, 33
   split: 0, 0, 0, 0
   orig: 60, 33
@@ -264,35 +257,35 @@ RightArrow
   index: -1
 SmallSlash
   rotate: false
-  xy: 324, 90
+  xy: 324, 88
   size: 256, 256
   orig: 256, 256
   offset: 0, 0
   index: -1
 Standw-Gun
   rotate: false
-  xy: 1898, 1402
+  xy: 1736, 797
   size: 64, 64
   orig: 64, 64
   offset: 0, 0
   index: -1
 TitleScreen
   rotate: false
-  xy: 2, 1022
+  xy: 2, 1020
   size: 1024, 1024
   orig: 1024, 1024
   offset: 0, 0
   index: -1
 UnPressed
   rotate: false
-  xy: 585, 2
+  xy: 1898, 1423
   size: 27, 6
   orig: 27, 6
   offset: 0, 0
   index: -1
 UnPressedBegin
   rotate: false
-  xy: 1832, 1468
+  xy: 1832, 1466
   size: 135, 30
   split: 0, 0, 0, 0
   orig: 135, 30
@@ -300,14 +293,14 @@ UnPressedBegin
   index: -1
 ball
   rotate: false
-  xy: 582, 266
+  xy: 934, 938
   size: 80, 80
   orig: 80, 80
   offset: 0, 0
   index: -1
 btn
   rotate: false
-  xy: 1895, 850
+  xy: 556, 34
   size: 12, 52
   split: 4, 5, 6, 7
   orig: 12, 52
@@ -315,7 +308,7 @@ btn
   index: -1
 btnPressed
   rotate: false
-  xy: 1992, 1896
+  xy: 1969, 1482
   size: 12, 46
   split: 4, 5, 4, 5
   orig: 12, 46
@@ -323,23 +316,15 @@ btnPressed
   index: -1
 bush
   rotate: false
-  xy: 1670, 1532
+  xy: 1670, 1530
   size: 192, 192
   split: 0, 0, 0, 0
   orig: 192, 192
   offset: 0, 0
   index: -1
-float soil
-  rotate: false
-  xy: 1670, 1370
-  size: 160, 160
-  split: 0, 0, 0, 0
-  orig: 160, 160
-  offset: 0, 0
-  index: -1
 grass
   rotate: false
-  xy: 648, 24
+  xy: 582, 214
   size: 64, 64
   split: 0, 0, 0, 0
   orig: 64, 64
@@ -347,7 +332,7 @@ grass
   index: -1
 grasspuff
   rotate: false
-  xy: 934, 812
+  xy: 1765, 1236
   size: 64, 64
   split: 0, 0, 0, 0
   orig: 64, 64
@@ -355,7 +340,7 @@ grasspuff
   index: -1
 item1
   rotate: false
-  xy: 1670, 845
+  xy: 1670, 1167
   size: 93, 199
   split: 0, 93, 92, 95
   orig: 93, 199
@@ -363,21 +348,21 @@ item1
   index: -1
 left1
   rotate: false
-  xy: 934, 764
+  xy: 1800, 1012
   size: 20, 11
   orig: 20, 11
   offset: 0, 0
   index: -1
 left2
   rotate: false
-  xy: 956, 764
+  xy: 2024, 2033
   size: 20, 11
   orig: 20, 11
   offset: 0, 0
   index: -1
 paltform1
   rotate: false
-  xy: 324, 8
+  xy: 324, 6
   size: 230, 80
   split: 112, 109, 49, 28
   orig: 230, 80
@@ -385,7 +370,7 @@ paltform1
   index: -1
 paltform2
   rotate: false
-  xy: 582, 90
+  xy: 1670, 863
   size: 220, 30
   split: 0, 0, 0, 0
   orig: 220, 30
@@ -393,14 +378,14 @@ paltform2
   index: -1
 puddle
   rotate: false
-  xy: 556, 24
+  xy: 582, 280
   size: 90, 64
   orig: 90, 64
   offset: 0, 0
   index: -1
 retry (1)
   rotate: false
-  xy: 804, 108
+  xy: 1802, 849
   size: 80, 12
   split: 0, 0, 0, 0
   orig: 80, 12
@@ -408,22 +393,14 @@ retry (1)
   index: -1
 rock
   rotate: false
-  xy: 582, 131
+  xy: 968, 762
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 soil
   rotate: false
-  xy: 1670, 1046
-  size: 160, 160
-  split: 0, 0, 0, 0
-  orig: 160, 160
-  offset: 0, 0
-  index: -1
-soil cliff
-  rotate: false
-  xy: 1670, 1208
+  xy: 1670, 1368
   size: 160, 160
   split: 0, 0, 0, 0
   orig: 160, 160
@@ -431,7 +408,7 @@ soil cliff
   index: -1
 tree
   rotate: false
-  xy: 1318, 122
+  xy: 1318, 120
   size: 640, 640
   split: 121, 50, 373, 167
   orig: 640, 640

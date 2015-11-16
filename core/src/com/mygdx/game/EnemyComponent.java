@@ -2,15 +2,14 @@ package com.mygdx.game;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.Vector2;
+import com.uwsoft.editor.renderer.components.TransformComponent;
 
 /**
- * The component for an enemy.
+ * Created by Jaden on 13/11/2015.
  */
 public class EnemyComponent implements Component {
     Vector2 originalPosition;
-    Vector2 currentPosition;
     float timePassed = 0;
-    Vector2 speed = new Vector2(33, 0);
-    public EnemyComponent() {
+    public EnemyComponent(){
     }
 }
