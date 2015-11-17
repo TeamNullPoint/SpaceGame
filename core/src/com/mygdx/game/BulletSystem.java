@@ -42,10 +42,14 @@ public class BulletSystem extends EntitySystem {
         //slightly.
         if(bulletComponent.originalPosition == null && player.getShoot()) {
             bulletComponent.originalPosition = new Vector2(transformComponent.x, transformComponent.y);
+            bulletComponent.currentDirection = transformComponent.scaleX;
+
             bulletComponent.isLive = true;
+
             transformComponent.x = player.getX() + player.getWidth() / 2 + 10;
             transformComponent.y = player.getY();
-            transformComponent.x += 22 * deltaTime;
+
+            transformComponent.x += 70 * deltaTime;
         } else if(bulletComponent.originalPosition != null) {
             //The bullet is in the air if the original position is not null.
             //Check if it is not out of range, if it is
@@ -53,7 +57,7 @@ public class BulletSystem extends EntitySystem {
             //keep moving it.
             float dist = Math.abs(transformComponent.x - player.getX());
             if (dist < 200) {
-                transformComponent.x += 22 * deltaTime;
+                transformComponent.x += 70 * deltaTime;
             } else {
                 //Destroy the bullet.
                 transformComponent.x = bulletComponent.originalPosition.x;
@@ -63,6 +67,7 @@ public class BulletSystem extends EntitySystem {
 
 
             //Let's check if it has hit anyone
+            enemyCheckLoop:
             for(Entity enemy : collisionEntities){
                 CollisionComponent enemyCollisionComponent = (CollisionComponent) enemy.getComponents().get(enemy.getComponents().size() - 1);
                 DimensionsComponent enemyDimensionsComponent = (DimensionsComponent) enemy.getComponents().get(0);
@@ -74,11 +79,14 @@ public class BulletSystem extends EntitySystem {
                         engine.removeEntity(enemy);
                         System.out.println("auchhhh");
                         System.out.println(currentBulletPosition.x +","+ enemyCollisionComponent.position.x);
+                        transformComponent.x = bulletComponent.originalPosition.x;
+                        transformComponent.y = bulletComponent.originalPosition.y;
+                        bulletComponent.originalPosition = null;
                     }
+                } else {
+                    break enemyCheckLoop;
                 }
             }
         }
-
-
     }
 }

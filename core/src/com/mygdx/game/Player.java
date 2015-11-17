@@ -86,21 +86,21 @@ public class Player implements IScript {
 
     @Override
     public void act(float delta) {
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+        if(Gdx.input.isKeyPressed(Input.Keys.A)) {
             transformComponent.x -= speed.x * delta;
 
             transformComponent.scaleX = -1f;
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+        if(Gdx.input.isKeyPressed(Input.Keys.D)) {
             transformComponent.x  += speed.x * delta;
             transformComponent.scaleX = 1f;
         }
-        if(Gdx.input.isKeyPressed(Input.Keys.S)) {
+        if(Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
             speed.y = jumpSpeed;
             grounded = false;
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.A)) {
+        if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
             shoot = true;
         } else {
             shoot = false;
@@ -109,11 +109,11 @@ public class Player implements IScript {
             jumpingState();
             stopJumpAnimation = false;
         }
-        if((right|| left) && landed() && !stopJumpAnimation) {
+        if((Gdx.input.isKeyPressed(Input.Keys.D)|| Gdx.input.isKeyPressed(Input.Keys.A)) && landed() && !stopJumpAnimation) {
             walkingState();
             stopJumpAnimation = true;
         }
-        if(!(left || right)&& landed()){
+        if(!(Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.A))&& landed()){
             standingState();
             stopJumpAnimation = false;
         }
