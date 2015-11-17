@@ -102,7 +102,6 @@ public class UIStage extends Stage {
                 Player.doshoot(true);
                 return true;
             }
-
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 Player.doshoot(false);

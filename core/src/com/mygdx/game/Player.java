@@ -100,7 +100,7 @@ public class Player implements IScript {
             grounded = false;
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.SHIFT_LEFT)) {
             shoot = true;
         } else {
             shoot = false;
@@ -185,8 +185,6 @@ public class Player implements IScript {
         Vector2 rayTo = new Vector2((transformComponent.y + dimensionsComponent.height/2) * PhysicsBodyLoader.getScale(),
                 (transformComponent.y - raySize)* PhysicsBodyLoader.getScale());
 
-
-
         world.rayCast(new RayCastCallback() {
             @Override
             public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
@@ -211,8 +209,20 @@ public class Player implements IScript {
     public float getWidth() {
         return dimensionsComponent.width;
     }
+    public float getHeight() {
+        return dimensionsComponent.height;
+    }
+    public BulletComponent.PLAYER_DIRECTION facingDirection(){
+        switch ((int) transformComponent.scaleX){
+            case 1 :
+                return BulletComponent.PLAYER_DIRECTION.RIGHT_DIRECTION;
+            case -1 :
+                return BulletComponent.PLAYER_DIRECTION.LEFT_DIRECTION;
+            default :
+                throw new AssertionError("Invalid direction for player");
+        }
+    }
     @Override
     public void dispose() {
-
     }
 }

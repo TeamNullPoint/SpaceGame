@@ -30,7 +30,6 @@ public class CollisionSystem extends IteratingSystem {
         this.bulletEntities = engine.getEntitiesFor(Family.all(BulletComponent.class).get());
     }
 
-
     private CollisionComponent collisionComponent;
     private BulletComponent bulletComponent;
 
@@ -61,25 +60,8 @@ public class CollisionSystem extends IteratingSystem {
 
 
             if (currentPlayerPosition.dst(collisionComponent.position) <= ((collisionComponent.width / 2) + (player.getWidth() / 2))) {
-                System.out.println("collision! ! !  ! !  ! ! ! ! ! !  ");
-                //engine.removeEntity(entity);
+                System.out.println("**Collision Detected**");
             }
-//            System.out.println(bulletEntities.size());
-//            ImmutableArray<Entity> testBulletEntities = engine.getEntitiesFor(Family.all(BulletComponent.class).get());
-//
-//            for(Entity bullet : testBulletEntities){
-//                BulletComponent currentBulletComponent = ComponentRetriever.get(bullet, BulletComponent.class);
-//                DimensionsComponent bulletDimensionsComponent = ComponentRetriever.get(bullet, DimensionsComponent.class);
-//
-//                //If this bullet is in the air then check if this entity is colliding with it.
-//                if(currentBulletComponent.originalPosition != null){
-//                    Vector2 currentBulletPosition = new Vector2(currentBulletComponent.x, currentBulletComponent.y);
-//                    if(currentBulletPosition.dst(collisionComponent.position) <= ((collisionComponent.width / 2) + (bulletDimensionsComponent.width / 2))){
-//                        engine.removeEntity(entity);
-//                    }
-//                }
-//            }
         }
-
     }
 }

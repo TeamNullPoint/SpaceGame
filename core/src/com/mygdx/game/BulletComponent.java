@@ -8,8 +8,19 @@ import com.uwsoft.editor.renderer.components.TransformComponent;
  * Created by Jaden on 15/11/2015.
  */
 public class BulletComponent implements Component {
-    public static final float LEFT_DIRECTION = -1;
-    public static final float RIGHT_DIRECTION = 1;
+    public enum PLAYER_DIRECTION{
+        LEFT_DIRECTION(-1), RIGHT_DIRECTION(1);
+        private float direction;
+
+        PLAYER_DIRECTION(float direction){
+            this.direction = direction;
+        }
+
+        public float getDirection(){
+            return this.direction;
+        }
+    }
+
     public float x;
     public float y;
     //public float scaleX;
