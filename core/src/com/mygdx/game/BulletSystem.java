@@ -24,7 +24,7 @@ public class BulletSystem extends EntitySystem {
 
     private Queue<Entity> inAirBullets;
     private Queue<Entity> inCartridgeBullets;
-
+//comments
     private Player player;
     Engine engine;
     public BulletSystem(Engine engine, Player player) {
@@ -56,8 +56,6 @@ public class BulletSystem extends EntitySystem {
         }
     }
 
-
-
     public boolean canPullTrigger(){
         Entity lastBullet = inCartridgeBullets.peek();
         System.out.println(inCartridgeBullets.size());
@@ -85,7 +83,7 @@ public class BulletSystem extends EntitySystem {
             //slightly.
             if(bulletComponent.originalPosition != null) {
                 //Update in air bullet
-                moveBullet(entity, deltaTime, bulletComponent, transformComponent, player.facingDirection());
+                moveBullet(entity, deltaTime, bulletComponent, transformComponent);
 
                 //Let's check if it has hit anyone
                 enemyCheckLoop:
@@ -149,7 +147,7 @@ public class BulletSystem extends EntitySystem {
     }
 
 
-    private void moveBullet(Entity bullet, float deltaTime, BulletComponent bulletComponent, TransformComponent bulletTransformComponent, BulletComponent.PLAYER_DIRECTION playerDirection){
+    private void moveBullet(Entity bullet, float deltaTime, BulletComponent bulletComponent, TransformComponent bulletTransformComponent){
         float dist = Math.abs(bulletTransformComponent.x - player.getX());
         float incrementAmount = bulletComponent.currentDirection == -1 ? -1 * (70 * deltaTime) : 70 * deltaTime;
 
