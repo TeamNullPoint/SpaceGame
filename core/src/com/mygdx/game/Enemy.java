@@ -4,31 +4,28 @@ import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.physics.box2d.RayCastCallback;
 import com.badlogic.gdx.physics.box2d.World;
-import com.uwsoft.editor.renderer.components.*;
+import com.uwsoft.editor.renderer.components.DimensionsComponent;
+import com.uwsoft.editor.renderer.components.TransformComponent;
 import com.uwsoft.editor.renderer.components.sprite.SpriteAnimationComponent;
 import com.uwsoft.editor.renderer.components.sprite.SpriteAnimationStateComponent;
 import com.uwsoft.editor.renderer.physics.PhysicsBodyLoader;
 import com.uwsoft.editor.renderer.scripts.IScript;
 import com.uwsoft.editor.renderer.utils.ComponentRetriever;
 
-import java.security.Key;
-
 /**
- * Initialization logic
- * Iteration logic and disposal logic.
+ * Created by Jaden on 15/11/2015.
  */
-public class Player implements IScript {
+public class Enemy  implements IScript {
     private boolean grounded = false;
     private boolean stopJumpAnimation = true;
-    private Entity player;
+    private Player player;
+    private Entity enemy;
     private static TransformComponent transformComponent;
     private static DimensionsComponent dimensionsComponent;
     private SpriteAnimationComponent spriteAnimationComponent;
@@ -36,15 +33,12 @@ public class Player implements IScript {
 
 
 
-    private static boolean left = false;
-    private static boolean right = false;
-    private static boolean jump = false;
-    private static boolean shoot = false;
-
     private World world;
 
-    public Player(World world) {
+    public Enemy(World world, Player player) {
+
         this.world = world;
+        this.player = player;
     }
 
 
@@ -55,19 +49,14 @@ public class Player implements IScript {
 
     @Override
     public void init(Entity entity) {
-        player = entity;
+        enemy = entity;
 
         transformComponent = ComponentRetriever.get(entity, TransformComponent.class);
         dimensionsComponent = ComponentRetriever.get(entity, DimensionsComponent.class);
         spriteAnimationComponent = ComponentRetriever.get(entity, SpriteAnimationComponent.class);
         spriteAnimationStateComponent = ComponentRetriever.get(entity, SpriteAnimationStateComponent.class);
-        ImmutableArray<Component> allComponents = entity.getComponents();
-        for(Component c :allComponents) {
-            System.out.println(c);
-        }
-        speed = new Vector2(33, 0);
 
-
+        speed = new Vector2(15, 0);
 
     }
 
@@ -84,74 +73,53 @@ public class Player implements IScript {
         spriteAnimationStateComponent.set(spriteAnimationComponent.frameRangeMap.get("jumpshooting"), 13, Animation.PlayMode.LOOP);
     }
 
+
+    private Vector2 originalPosition = new Vector2();
+    private float timePassed;
+
     @Override
     public void act(float delta) {
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            transformComponent.x -= speed.x * delta;
 
-            transformComponent.scaleX = -1f;
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            transformComponent.x  += speed.x * delta;
-            transformComponent.scaleX = 1f;
-        }
-        if(Gdx.input.isKeyPressed(Input.Keys.S)) {
-            speed.y = jumpSpeed;
-            grounded = false;
+        //transformComponent.x += speed.x * delta;
+        if(originalPosition == null) {
+            originalPosition.x = transformComponent.x;
+            originalPosition.y = transformComponent.y;
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.A)) {
-            shoot = true;
+        float dist = transformComponent.x - player.getX();
+        if(Math.abs(dist) <= 30) {
+            if(Math.abs(dist) < 5) {
+                //timePassed = 0;
+
+            } else if(dist > 0) {
+              transformComponent.x -= speed.x * delta;
+            } else {
+                transformComponent.x += speed.x * delta;
+            }
+            originalPosition.x = transformComponent.x;
+
+            timePassed = 0;
         } else {
-            shoot = false;
-        }
-        if(!landed()) {
-            jumpingState();
-            stopJumpAnimation = false;
-        }
-        if((right|| left) && landed() && !stopJumpAnimation) {
-            walkingState();
-            stopJumpAnimation = true;
-        }
-        if(!(left || right)&& landed()){
-            standingState();
-            stopJumpAnimation = false;
+            //manage scaleX later.
+            timePassed += delta;
+            transformComponent.x = (originalPosition.x +
+                    MathUtils.sin(timePassed * MathUtils.degreesToRadians * 20f) * 20f);
         }
 
-        speed.y += gravity*delta;
-        transformComponent.y += speed.y * delta;
+
         rayCast();
         checkForBodyCollision();
 
     }
-    public static void moveLeft(boolean yes)
-    {
-       left = yes;
-    }
-    public static void moveRight(boolean yes)
-    {
-        right = yes;
-    }
-    public static void dojump(boolean yes)
-    {
-        jump = yes;
-    }
-    public static void doshoot(boolean yes)
-    {
-        shoot = yes;
-    }
 
-    public boolean getShoot() {
-        return shoot;
-    }
-    public void setShoot(boolean shoot) {
-        this.shoot = shoot;
-    }
+
+
+
 
     private void rayCast() {
         float rayGap = (dimensionsComponent.height) / 2;
 
-        float raySize = -(speed.y+Gdx.graphics.getDeltaTime())*Gdx.graphics.getDeltaTime();
+        float raySize = -(speed.y+ Gdx.graphics.getDeltaTime())*Gdx.graphics.getDeltaTime();
 
 
         if(speed.y > 0) return;

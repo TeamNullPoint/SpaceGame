@@ -3,6 +3,7 @@ package com.mygdx.game;
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.Vector2;
 
+
 /**
  */
 public class CollisionComponent implements Component {
@@ -10,6 +11,5 @@ public class CollisionComponent implements Component {
     float width;
     float height;
 
-    public CollisionComponent() {
-    }
+    public CollisionComponent(){}
 }
